@@ -8,7 +8,7 @@
 			"Zimtis\\ArrayValidation\\" : "src"
 		}
 	},
-	"name" : "zimtis/ArrayValidation",
+	"name" : "zimtis/arrayvalidation",
 	"type" : "library",
 	"description" : "A library to validate the contens of an array",
 	"require" : {
