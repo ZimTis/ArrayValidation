@@ -1,16 +1,6 @@
 <?php
-namespace Zimtis\ArrayValidation;
+namespace zimtis\arrayvalidation;
 
-/**
- *
- * @author ZimTis
- *        
- */
 class Test
 {
-
-    public function __construct()
-    {
-        echo 'S';
-    }
 }
