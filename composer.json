@@ -1,0 +1,17 @@
+{
+	"keywords" : [
+		"array",
+		"validation"
+	],
+	"autoload" : {
+		"psr-4" : {
+			"Zimtis\\ArrayValidation\\" : "src"
+		}
+	},
+	"name" : "zimtis/ArrayValidation",
+	"type" : "library",
+	"description" : "A library to validate the contens of an array",
+	"require" : {
+		"php" : ">=5.3"
+	}
+}
