@@ -13,5 +13,12 @@
 	"description" : "A library to validate the contens of an array",
 	"require" : {
 		"php" : ">=5.3"
+	},
+	"support" : {
+		"source" : "https://github.com/ZimTis/ArrayValidation"
+	},
+	"require-dev" : {
+	    "php" : ">=5.3",
+		"phpunit/phpunit" : "~3"
 	}
 }
