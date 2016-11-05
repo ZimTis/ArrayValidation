@@ -63,9 +63,9 @@ class Validator
      * This functions starts the validation process.
      * If a options is set, that changes values e.g. "trim", the array will be changed.
      *
-     * @param unknown $values
+     * @param array $values
      *            array you want to validate
-     * @param unknown $validation
+     * @param string $validation
      *            name of the validation you want to validate against
      */
     public function validate(array &$values, $validation)
@@ -75,5 +75,24 @@ class Validator
         } else {
             throw new \Exception("No Validation with the name " . $validation . ' was found');
         }
+    }
+
+    /**
+     *
+     * @return array
+     */
+    public function getValidations()
+    {
+        return $this->validations;
+    }
+
+    /**
+     *
+     * @param string $name            
+     * @return NULL|Validation
+     */
+    public function getValidationByName($name)
+    {
+        return key_exists($name, $this->validations) ? $this->validations[$name] : null;
     }
 }
