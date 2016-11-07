@@ -30,7 +30,9 @@ class IntegerValidation extends KeyValidation
     public function validate(array &$values)
     {
         parent::validate($values);
-        $this->validateLength($values[$this->getName()]);
+        if (key_exists($this->getName(), $values)) {
+            $this->validateLength($values[$this->getName()]);
+        }
     }
 
     /**
