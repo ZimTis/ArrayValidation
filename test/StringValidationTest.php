@@ -16,6 +16,8 @@ class StringValidationTest extends TestCase
 
     private $minMaxNoTrimSchema = "minMaxNoTrim";
 
+    private $correctStringSchema = "correctString.json";
+
     /**
      * @before
      */
@@ -24,6 +26,7 @@ class StringValidationTest extends TestCase
         $this->validator = new Validator();
         $this->validator->addValidation(new Validation('test' . DIRECTORY_SEPARATOR . 'schema' . DIRECTORY_SEPARATOR . 'stringMinMax.json'), $this->minMaxTrimSchema);
         $this->validator->addValidation(new Validation('test' . DIRECTORY_SEPARATOR . 'schema' . DIRECTORY_SEPARATOR . 'stringMinMaxNoTrim.json'), $this->minMaxNoTrimSchema);
+        $this->validator->addValidation(new Validation('test' . DIRECTORY_SEPARATOR . 'schema' . DIRECTORY_SEPARATOR . 'correctString.json'), $this->correctStringSchema);
         $this->assertNotNull($this->validator);
     }
 
@@ -153,5 +156,12 @@ class StringValidationTest extends TestCase
         
         $this->validator->validate($a, $this->minMaxNoTrimSchema);
         $this->assertEquals("aaaaa", $a['name']);
+    }
+
+    public function testRequiredCorrect()
+    {
+        $a = array();
+        
+        $this->validator->validate($a, $this->correctStringSchema);
     }
 }
