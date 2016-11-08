@@ -5,6 +5,7 @@ use zimtis\arrayvalidation\keyValidation\StringValidation;
 use zimtis\arrayvalidation\keyValidation\IntegerValidation;
 use zimtis\arrayvalidation\keyValidation\KeyValidation;
 use zimtis\arrayvalidation\keyValidation\FloatValidation;
+use zimtis\arrayvalidation\keyValidation\BooleanValidation;
 
 /**
  *
@@ -61,6 +62,9 @@ class Validation
                         break;
                     case Types::FLOAT:
                         array_push($this->keyValidations, new FloatValidation($value, $key));
+                        break;
+                    case Types::BOOLEAN:
+                        array_push($this->keyValidations, new BooleanValidation($value, $key));
                         break;
                     default:
                         throw new \Exception('type: ' . $value['type'] . ' does not exist');

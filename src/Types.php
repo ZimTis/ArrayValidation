@@ -27,4 +27,6 @@ class Types
     const INT = "int";
 
     const FLOAT = "float";
+
+    const BOOLEAN = "boolean";
 }

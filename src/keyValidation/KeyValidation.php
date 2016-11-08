@@ -262,6 +262,16 @@ abstract class KeyValidation
                         $this->throwDefaultException("integer");
                     }
                     break;
+                case Types::FLOAT:
+                    if (! is_null($this->options[Options::DEFAULT_O]) && ! is_float($this->options[Options::DEFAULT_O])) {
+                        $this->throwDefaultException("float");
+                    }
+                    break;
+                case Types::BOOLEAN:
+                    if (! is_null($this->options[Options::DEFAULT_O]) && ! is_bool($this->options[Options::DEFAULT_O])) {
+                        $this->throwDefaultException("float");
+                    }
+                    break;
             }
         }
     }
