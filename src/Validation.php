@@ -4,6 +4,7 @@ namespace zimtis\arrayvalidation;
 use zimtis\arrayvalidation\keyValidation\StringValidation;
 use zimtis\arrayvalidation\keyValidation\IntegerValidation;
 use zimtis\arrayvalidation\keyValidation\KeyValidation;
+use zimtis\arrayvalidation\keyValidation\FloatValidation;
 
 /**
  *
@@ -57,6 +58,9 @@ class Validation
                     case Types::INT:
                     case Types::INTEGER:
                         array_push($this->keyValidations, new IntegerValidation($value, $key));
+                        break;
+                    case Types::FLOAT:
+                        array_push($this->keyValidations, new FloatValidation($value, $key));
                         break;
                     default:
                         throw new \Exception('type: ' . $value['type'] . ' does not exist');

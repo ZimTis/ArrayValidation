@@ -112,6 +112,18 @@ abstract class KeyValidation
         $this->options[$key] = ! $e ? $default : $value;
     }
 
+    protected function checkForFloat($key, $default = null, $required = false)
+    {
+        $e = $this->checkForRequired($key, $required);
+        if ($e && ! is_float($this->options[$key])) {
+            throw new \Exception($key . ' must be float');
+        }
+        
+        $value = $e ? $this->options[$key] : NULL;
+        
+        $this->options[$key] = ! $e ? $default : $value;
+    }
+
     /**
      * This functionc checks, if the options dont contain options from $a and $b
      *

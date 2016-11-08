@@ -25,4 +25,6 @@ class Types
      * @var string
      */
     const INT = "int";
+
+    const FLOAT = "float";
 }
