@@ -1,7 +1,0 @@
-{
-	"name": {
-		"type": "string",
-		"minLength": 5,
-		"maxLength": 6
-	}
-}
