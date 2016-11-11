@@ -56,4 +56,9 @@ class NestesValidation extends Validation
             }
         }
     }
+
+    public function getValidations()
+    {
+        return $this->validations;
+    }
 }

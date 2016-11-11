@@ -1,0 +1,13 @@
+{
+    "name":{
+        "type":"string"
+    },
+    "position":{
+        "lat":{
+            "type":"float"
+        },
+        "lng":{
+            "type":"float"
+        }
+    }
+}
