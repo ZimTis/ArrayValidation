@@ -27,5 +27,7 @@ class Types
 
     const BOOLEAN = "boolean";
 
+    const ARRY = 'array';
+
     const INTEGER_OR_FLOAT = 'integerOrFloat';
 }

@@ -100,4 +100,11 @@ class Options
      * @var string
      */
     const MAX = 'max';
+
+    /**
+     * available for array
+     *
+     * @var string
+     */
+    const ITEM = 'item';
 }

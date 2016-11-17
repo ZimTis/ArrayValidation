@@ -120,6 +120,11 @@ abstract class KeyValidation extends Validation
         $this->checkForType($option, $required, $default, Types::BOOLEAN);
     }
 
+    protected function checkForArray($option, $default = null, $required = false)
+    {
+        $this->checkForType($option, $required, $default, Types::ARRY);
+    }
+
     /**
      * This functionc checks, if the options dont contain options from $a and $b
      *
@@ -182,6 +187,11 @@ abstract class KeyValidation extends Validation
                 case Types::INTEGER_OR_FLOAT:
                     if (! is_int($this->options[$option]) && ! is_float($this->options[$option])) {
                         $this->triggerTypeCheckError($option, 'integer or float');
+                    }
+                    break;
+                case Types::ARRY:
+                    if (! is_array($this->options[$option])) {
+                        $this->triggerTypeCheckError($option, $type);
                     }
                     break;
                 default:

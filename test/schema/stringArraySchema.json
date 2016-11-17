@@ -1,0 +1,9 @@
+{
+    "name":{
+        "type":"array",
+        "length":3,
+        "item":{
+            "type":"string"
+        }
+    }
+}

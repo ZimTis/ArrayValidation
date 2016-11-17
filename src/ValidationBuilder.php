@@ -7,6 +7,7 @@ use zimtis\arrayvalidation\validations\KeyValidation;
 use zimtis\arrayvalidation\validations\keyValidations\IntegerValidation;
 use zimtis\arrayvalidation\validations\keyValidations\FloatValidation;
 use zimtis\arrayvalidation\validations\keyValidations\BooleanValidation;
+use zimtis\arrayvalidation\validations\keyValidations\ArrayValidation;
 
 /**
  *
@@ -59,7 +60,7 @@ class ValidationBuilder
      *
      * @see KeyValidation
      */
-    private static function buildKeyValidation(array $options, $name)
+    public static function buildKeyValidation(array $options, $name)
     {
         if (! key_exists(Options::TYPE, $options)) {
             trigger_error($name . ' must have a type');
@@ -76,6 +77,8 @@ class ValidationBuilder
                 return new FloatValidation($name, $options);
             case Types::BOOLEAN:
                 return new BooleanValidation($name, $options);
+            case Types::ARRY:
+                return new ArrayValidation($name, $options);
             default:
                 trigger_error(sprintf('%s is unknown', $options[Options::TYPE]), E_USER_ERROR);
         }
