@@ -156,12 +156,23 @@ abstract class KeyValidation extends Validation
     /**
      *
      * @param string $option            
-     * @param string $required            
+     * @param boolean $required            
      * @param int|float|null $default            
      */
     protected function checkForIntOrFloat($option, $required = false, $default = null)
     {
         $this->checkForType($option, $required, $default, Types::INTEGER_OR_FLOAT);
+    }
+
+    /**
+     *
+     * @param string $option            
+     * @param boolean $required            
+     * @param string|null $default            
+     */
+    protected function checkForString($option, $required = false, $default = null)
+    {
+        $this->checkForType($option, $required, $default, Types::STRING);
     }
 
     private function checkForType($option, $required, $default, $type)

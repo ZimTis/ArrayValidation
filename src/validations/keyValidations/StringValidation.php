@@ -8,6 +8,8 @@ use zimtis\arrayvalidation\filter\attributeFilter\StringMinLengthFilter;
 use zimtis\arrayvalidation\filter\attributeFilter\StringMaxLengthFilter;
 use zimtis\arrayvalidation\filter\attributeFilter\StringLengthFilter;
 use zimtis\arrayvalidation\filter\attributeFilter\StringTrimmedFilter;
+use zimtis\arrayvalidation\filter\attributeFilter\StringStartsWithFilter;
+use zimtis\arrayvalidation\filter\attributeFilter\StringEndsWithFilter;
 
 /**
  * Validates a String
@@ -42,6 +44,14 @@ class StringValidation extends KeyValidation
             $this->addFilter(new StringLengthFilter($this->getOption(Options::LENGTH)));
         }
         
+        if (! is_null($this->getOption(Options::START_WITH))) {
+            $this->addFilter(new StringStartsWithFilter($this->getOption(Options::START_WITH)));
+        }
+        
+        if (! is_null($this->getOption(Options::END_WITH))) {
+            $this->addFilter(new StringEndsWithFilter($this->getOption(Options::END_WITH)));
+        }
+        
         $this->addFilter(new StringTrimmedFilter($this->getOption(Options::TRIMMED)));
     }
 
@@ -64,6 +74,8 @@ class StringValidation extends KeyValidation
         $this->checkForInt(Options::MAX_LENGTH);
         $this->checkForInt(Options::LENGTH);
         $this->checkForBoolean(Options::TRIMMED);
+        $this->checkForString(Options::START_WITH);
+        $this->checkForString(Options::END_WITH);
         
         if (! is_null($this->getOption(Options::MAX_LENGTH)) && ! is_null($this->getOption(Options::MIN_LENGTH))) {
             if ($this->getOption(Options::MAX_LENGTH) < $this->getOption(Options::MIN_LENGTH)) {

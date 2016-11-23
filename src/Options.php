@@ -107,4 +107,18 @@ class Options
      * @var string
      */
     const ITEM = 'item';
+
+    /**
+     * available for string
+     *
+     * @var string
+     */
+    const START_WITH = 'startWith';
+
+    /**
+     * available for string
+     *
+     * @var string
+     */
+    const END_WITH = 'endWith';
 }
