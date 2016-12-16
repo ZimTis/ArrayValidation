@@ -1,0 +1,15 @@
+{
+	"a": {
+		"type": "string"
+	},
+	"b": {
+		"c": {
+			"type": "float",
+			"required": true
+		},
+		"d": {
+			"type": "float",
+			"required": true
+		}
+	}
+}

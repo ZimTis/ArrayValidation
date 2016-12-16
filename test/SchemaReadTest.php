@@ -3,53 +3,47 @@ use PHPUnit\Framework\TestCase;
 use zimtis\arrayvalidation\Validator;
 use zimtis\arrayvalidation\validations\NestesValidation;
 use zimtis\arrayvalidation\validations\Validation;
-use zimtis;
 
-class SchemaReadTest extends TestCase
-{
+class SchemaReadTest extends TestCase {
 
     /**
      *
      * @var Validator
+     *
      */
     private $validator;
 
     /**
      * @before
      */
-    public function setupTest()
-    {
+    public function setupTest(){
         $this->validator = new Validator();
     }
 
     /**
      * @expectedException PHPUnit_Framework_Error
      */
-    public function testInvalidJson()
-    {
+    public function testInvalidJson(){
         $this->validator->addSchemaValidation('test' . DIRECTORY_SEPARATOR . 'schema' . DIRECTORY_SEPARATOR . 'invalidJsonSchema.json');
     }
 
     /**
      * @expectedException PHPUnit_Framework_Error
      */
-    public function testJsonFileNOtFound()
-    {
+    public function testJsonFileNOtFound(){
         $this->validator->addSchemaValidation('test' . DIRECTORY_SEPARATOR . 'schema' . DIRECTORY_SEPARATOR . 'whereAreYou.json');
     }
 
-    public function testExistingValidJsonFile()
-    {
+    public function testExistingValidJsonFile(){
         $this->validator->addSchemaValidation('test' . DIRECTORY_SEPARATOR . 'schema' . DIRECTORY_SEPARATOR . 'validJson.json');
-        
+
         $this->assertInstanceOf('zimtis\arrayvalidation\validations\NestesValidation', $this->validator->getSchemaValidationByName('validJson'));
     }
 
     /**
      * @expectedException PHPUnit_Framework_Error
      */
-    public function testReadSchemaWithExistingNameByFileName()
-    {
+    public function testReadSchemaWithExistingNameByFileName(){
         $this->validator->addSchemaValidation('test' . DIRECTORY_SEPARATOR . 'schema' . DIRECTORY_SEPARATOR . 'validJson.json');
         $this->validator->addSchemaValidation('test' . DIRECTORY_SEPARATOR . 'schema' . DIRECTORY_SEPARATOR . 'validJson.json');
     }
@@ -57,8 +51,7 @@ class SchemaReadTest extends TestCase
     /**
      * @expectedException PHPUnit_Framework_Error
      */
-    public function testReadSchemaWithExistingNameByManuelName()
-    {
+    public function testReadSchemaWithExistingNameByManuelName(){
         $this->validator->addSchemaValidation('test' . DIRECTORY_SEPARATOR . 'schema' . DIRECTORY_SEPARATOR . 'validJson.json', 'name');
         $this->validator->addSchemaValidation('test' . DIRECTORY_SEPARATOR . 'schema' . DIRECTORY_SEPARATOR . 'validJson.json', 'name');
     }
@@ -66,28 +59,26 @@ class SchemaReadTest extends TestCase
     /**
      * @expectedException PHPUnit_Framework_Error
      */
-    public function testValidJsonWithTypeMissing()
-    {
+    public function testValidJsonWithTypeMissing(){
         $this->validator->addSchemaValidation('test' . DIRECTORY_SEPARATOR . 'schema' . DIRECTORY_SEPARATOR . 'validJsonTypeMissing.json', 'name');
     }
 
     /**
      * Test a json file that has a valid json and a valid validation format
      */
-    public function testReadValidJsonWithValidFormat()
-    {
+    public function testReadValidJsonWithValidFormat(){
         $this->validator->addSchemaValidation('test' . DIRECTORY_SEPARATOR . 'schema' . DIRECTORY_SEPARATOR . 'validJson.json');
-        
+
         /**
          *
          * @var NestesValidation $validation
          */
         $validation = $this->validator->getSchemaValidationByName('validJson');
-        
+
         $v = $validation->getValidations();
-        
+
         $this->assertEquals(1, count($v));
-        
+
         /**
          *
          * @var Validation $v
@@ -97,77 +88,75 @@ class SchemaReadTest extends TestCase
         $this->assertEquals('name', $v->getName());
     }
 
-    public function testReadNestedJson()
-    {
+    public function testReadNestedJson(){
         $this->validator->addSchemaValidation('test' . DIRECTORY_SEPARATOR . 'schema' . DIRECTORY_SEPARATOR . 'validJsonWithNested.json');
-        
+
         /**
          *
          * @var NestesValidation $validation
          */
         $validation = $this->validator->getSchemaValidationByName('validJsonWithNested');
         $this->assertInstanceOf('zimtis\arrayvalidation\validations\Validation', $validation);
-        
+
         $v = $validation->getValidations();
         $this->assertEquals(2, count($v));
-        
+
         $this->assertInstanceOf('zimtis\arrayvalidation\validations\keyValidations\StringValidation', $v[0]);
         $this->assertInstanceOf('zimtis\arrayvalidation\validations\NestesValidation', $v[1]);
-        
+
         /**
          *
          * @var NestesValidation $nestedValidation
          */
         $nestedValidation = $v[1];
-        
+
         $v2 = $nestedValidation->getValidations();
-        
+
         $this->assertEquals(2, count($v2));
-        
+
         $this->assertInstanceOf('zimtis\arrayvalidation\validations\keyValidations\FloatValidation', $v2[0]);
         $this->assertInstanceOf('zimtis\arrayvalidation\validations\keyValidations\FloatValidation', $v2[1]);
     }
 
-    public function testReadComplexNestedJson()
-    {
+    public function testReadComplexNestedJson(){
         $this->validator->addSchemaValidation('test' . DIRECTORY_SEPARATOR . 'schema' . DIRECTORY_SEPARATOR . 'validJsonWithComplexNested.json');
-        
+
         /**
          *
          * @var NestesValidation $validation
          */
         $validation = $this->validator->getSchemaValidationByName('validJsonWithComplexNested');
         $this->assertInstanceOf('zimtis\arrayvalidation\validations\Validation', $validation);
-        
+
         $v = $validation->getValidations();
         $this->assertEquals(2, count($v));
-        
+
         $this->assertInstanceOf('zimtis\arrayvalidation\validations\keyValidations\StringValidation', $v[0]);
         $this->assertInstanceOf('zimtis\arrayvalidation\validations\NestesValidation', $v[1]);
-        
+
         /**
          *
          * @var NestesValidation $nestedValidation
          */
         $nestedValidation = $v[1];
-        
+
         $v2 = $nestedValidation->getValidations();
-        
+
         $this->assertEquals(3, count($v2));
-        
+
         $this->assertInstanceOf('zimtis\arrayvalidation\validations\keyValidations\FloatValidation', $v2[0]);
         $this->assertInstanceOf('zimtis\arrayvalidation\validations\keyValidations\FloatValidation', $v2[1]);
         $this->assertInstanceOf('zimtis\arrayvalidation\validations\NestesValidation', $v2[2]);
-        
+
         /**
          *
          * @var NestesValidation $nestedNestedValidation
          */
         $nestedNestedValidation = $v2[2];
-        
+
         $v3 = $nestedNestedValidation->getValidations();
         $this->assertEquals(2, count($v3));
-        
+
         $this->assertInstanceOf('zimtis\arrayvalidation\validations\keyValidations\StringValidation', $v3[0]);
         $this->assertInstanceOf('zimtis\arrayvalidation\validations\keyValidations\StringValidation', $v3[1]);
     }

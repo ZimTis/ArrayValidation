@@ -5,12 +5,11 @@ namespace zimtis\arrayvalidation\validations;
  * Responsable for validating one key schema
  *
  * @author ZimTis
- *        
+ *
  * @since 0.0.6 added
- *       
+ *
  */
-abstract class Validation
-{
+abstract class Validation {
 
     /**
      *
@@ -20,10 +19,9 @@ abstract class Validation
 
     /**
      *
-     * @param string $name            
+     * @param string $name
      */
-    public function __construct($name)
-    {
+    public function __construct($name){
         $this->name = $name;
     }
 
@@ -31,11 +29,10 @@ abstract class Validation
 
     /**
      *
-     * @param string $name            
+     * @param string $name
      * @return \zimtis\arrayvalidation\validations\Validation
      */
-    public function setName($name)
-    {
+    public function setName($name){
         $this->name;
         return $this;
     }
@@ -44,8 +41,7 @@ abstract class Validation
      *
      * @return string
      */
-    public function getName()
-    {
+    public function getName(){
         return $this->name;
     }
 }
