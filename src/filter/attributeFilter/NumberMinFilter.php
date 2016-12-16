@@ -7,11 +7,10 @@ use zimtis\arrayvalidation\Types;
 /**
  *
  * @author ZimTis
- *        
+ *
  * @since 0.0.6 added
  */
-class NumberMinFilter extends Filter
-{
+class NumberMinFilter extends Filter {
 
     /**
      *
@@ -21,33 +20,30 @@ class NumberMinFilter extends Filter
 
     /**
      *
-     * @param number $min            
+     * @param number $min
      */
-    public function __construct($min)
-    {
+    public function __construct($min){
         $this->min = $min;
     }
 
-    public function validate($value)
-    {
+    public function validate($value){
         if ($value < $this->min) {
             throw new \Exception(sprintf($this->getErrorString($value), $this->min, $value));
         }
-        
+
         parent::validate($value);
     }
 
-    private function getErrorString($type)
-    {
+    private function getErrorString($type){
         switch (gettype($type)) {
-            case Types::INTEGER:
+            case Types::INTEGER :
                 $type = '%d';
                 break;
-            case Types::DOUBLE:
+            case Types::DOUBLE :
                 $type = '%f';
                 break;
         }
-        
-        return sprintf('Must be bigger ot equal %s, %s found', $type, $type);
+
+        return sprintf('must be bigger ot equal %s, %s found', $type, $type);
     }
 }

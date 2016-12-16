@@ -7,11 +7,10 @@ use zimtis\arrayvalidation\Types;
 /**
  *
  * @author ZimTis
- *        
+ *
  * @since 0.0.6 added
  */
-class NumberMaxFilter extends Filter
-{
+class NumberMaxFilter extends Filter {
 
     /**
      *
@@ -21,32 +20,29 @@ class NumberMaxFilter extends Filter
 
     /**
      *
-     * @param number $max            
+     * @param number $max
      */
-    public function __construct($max)
-    {
+    public function __construct($max){
         $this->max = $max;
     }
 
-    public function validate($value)
-    {
+    public function validate($value){
         if ($value > $this->max) {
             throw new \Exception(sprintf($this->getErrorString($value), $this->max, $value));
         }
         parent::validate($value);
     }
 
-    private function getErrorString($type)
-    {
+    private function getErrorString($type){
         switch (gettype($type)) {
-            case Types::INTEGER:
+            case Types::INTEGER :
                 $type = '%d';
                 break;
-            case Types::DOUBLE:
+            case Types::DOUBLE :
                 $type = '%f';
                 break;
         }
-        
-        return sprintf('Must be smaller ot equal %s, %s found', $type, $type);
+
+        return sprintf('must be smaller ot equal %s, %s found', $type, $type);
     }
 }

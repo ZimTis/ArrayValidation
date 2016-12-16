@@ -55,11 +55,15 @@ abstract class KeyValidation extends Validation {
      */
     public function validate($value){
         if ($this->options[Options::REQUIRED] && !key_exists($this->getName(), $value)) {
-            throw new ValidationException($this->getName() . ' needs to be set', $this->getName());
+            throw new ValidationException($this->getFullName() . ' needs to be set', $this->getName());
         }
 
-        if (key_exists($this->getName(), $value)) {
-            $this->filterChain->validate($value[$this->getName()]);
+        try {
+            if (key_exists($this->getName(), $value)) {
+                $this->filterChain->validate($value[$this->getName()]);
+            }
+        } catch (\Exception $e ) {
+            throw new ValidationException($this->getFullName() . ' ' . $e->getMessage(), $this->getName());
         }
     }
 

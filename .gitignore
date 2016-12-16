@@ -6,4 +6,4 @@ composer.phar
 .project
 .project/*
 .buildpath
-test/scgema/*.ser
+test/schema/*.ser

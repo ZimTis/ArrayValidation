@@ -7,6 +7,7 @@ namespace zimtis\arrayvalidation\validations;
  * @author ZimTis
  *
  * @since 0.0.6 added
+ * @since 0.0.7 add getFullName method
  *
  */
 abstract class Validation {
@@ -16,6 +17,12 @@ abstract class Validation {
      * @var string
      */
     private $name;
+
+    /**
+     *
+     * @var Validation
+     */
+    private $parent;
 
     /**
      *
@@ -43,5 +50,21 @@ abstract class Validation {
      */
     public function getName(){
         return $this->name;
+    }
+
+    public function getFullName(){
+        if (is_null($this->parent)) {
+            return $this->getName();
+        }
+
+        return $this->parent->getFullName() . ':' . $this->getName();
+    }
+
+    public function setParent(Validation $parent){
+        $this->parent = $parent;
+    }
+
+    public function getParent(){
+        return $this->parent;
     }
 }

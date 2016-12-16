@@ -9,7 +9,7 @@ use zimtis\arrayvalidation\validations\Validation;
  *
  * @author ZimTis
  *
- * @since 0.0.6
+ * @since 0.0.6 added
  */
 class NestesValidation extends Validation {
 
@@ -28,6 +28,7 @@ class NestesValidation extends Validation {
     }
 
     public function addValidation(Validation $validation){
+        $validation->setParent($this);
         array_push($this->validations, $validation);
     }
 
