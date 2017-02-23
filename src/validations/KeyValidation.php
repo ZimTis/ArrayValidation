@@ -3,7 +3,7 @@ namespace zimtis\arrayvalidation\validations;
 
 use zimtis\arrayvalidation\validations\Validation;
 use zimtis\arrayvalidation\filter\Filter;
-use zimtis\arrayvalidation\Options;
+use zimtis\arrayvalidation\Properties;
 use zimtis\arrayvalidation\exceptions\ValidationException;
 use zimtis\arrayvalidation\filter\NullableFilter;
 use zimtis\arrayvalidation\Types;
@@ -39,10 +39,10 @@ abstract class KeyValidation extends Validation {
         parent::__construct($name);
         $this->options = $options;
 
-        $this->checkForBoolean(Options::REQUIRED);
-        $this->checkForBoolean(Options::NULLABLE, true);
+        $this->checkForBoolean(Properties::REQUIRED);
+        $this->checkForBoolean(Properties::NULLABLE, true);
 
-        $this->addFilter(new NullableFilter($this->options[Options::NULLABLE]));
+        $this->addFilter(new NullableFilter($this->options[Properties::NULLABLE]));
         $this->checkOptions();
         $this->buildFilterChain();
     }
@@ -54,7 +54,7 @@ abstract class KeyValidation extends Validation {
      * @see \zimtis\arrayvalidation\validations\Validation::validate()
      */
     public function validate($value){
-        if ($this->options[Options::REQUIRED] && !key_exists($this->getName(), $value)) {
+        if ($this->options[Properties::REQUIRED] && !key_exists($this->getName(), $value)) {
             throw new ValidationException($this->getFullName() . ' needs to be set', $this->getName());
         }
 

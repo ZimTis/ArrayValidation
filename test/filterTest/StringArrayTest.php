@@ -28,6 +28,9 @@ class StringArrayTest extends TestCase {
         $this->validator->validate("s", $a);
     }
 
+    /**
+     * @expectedException \Exception
+     */
     public function testIncorrect(){
         $a = array(
                 "name" => array(

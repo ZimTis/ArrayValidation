@@ -45,7 +45,7 @@ class ValidationBuilder {
      * @see NestesValidation
      */
     private static function isNestedValidation(array $value){
-        return !(key_exists(Options::TYPE, $value) && !is_array($value[Options::TYPE]));
+        return !(key_exists(Properties::TYPE, $value) && !is_array($value[Properties::TYPE]));
     }
 
     /**
@@ -58,11 +58,11 @@ class ValidationBuilder {
      * @see KeyValidation
      */
     public static function buildKeyValidation(array $options, $name){
-        if (!key_exists(Options::TYPE, $options)) {
+        if (!key_exists(Properties::TYPE, $options)) {
             trigger_error($name . ' must have a type');
         }
 
-        switch ($options[Options::TYPE]) {
+        switch ($options[Properties::TYPE]) {
             case Types::STR :
             case Types::STRING :
                 return new StringValidation($name, $options);
@@ -76,7 +76,7 @@ class ValidationBuilder {
             case Types::ARRY :
                 return new ArrayValidation($name, $options);
             default :
-                trigger_error(sprintf('%s is unknown', $options[Options::TYPE]), E_USER_ERROR);
+                trigger_error(sprintf('%s is unknown', $options[Properties::TYPE]), E_USER_ERROR);
         }
     }
 }
