@@ -37,16 +37,31 @@ class ArrayValidation extends KeyValidation {
                                                                 Properties::MIN_LENGTH ));
 
         $this->checkForArray(Properties::ITEM, NULL, true);
-        // TODO Auto-generated method stub
 
         $this->checkForInt(Properties::MAX_LENGTH);
         $this->checkForInt(Properties::MIN_LENGTH);
         $this->checkForInt(Properties::LENGTH);
 
         if (!is_null($this->getOption(Properties::MAX_LENGTH)) && !is_null($this->getOption(Properties::MIN_LENGTH))) {
-            if ($this->getOption(Properties::MAX_LENGTH) < $this->getOption(Properties::MIN_LENGTH)) {
-                trigger_error(Properties::MAX_LENGTH . ' must be bigger than ' . Properties::MIN_LENGTH, E_USER_ERROR);
+            if ($this->getOption(Properties::MAX_LENGTH) <= $this->getOption(Properties::MIN_LENGTH)) {
+                trigger_error(sprintf('%s:%s must be bigger than %s:%s', $this->getFullName(), Properties::MAX_LENGTH, $this->getFullName(), Properties::MIN_LENGTH), E_USER_ERROR);
             }
+        }
+
+        if (!is_null($this->getOption(Properties::LENGTH))) {
+            if ($this->getOption(Properties::LENGTH) < 1) {
+                trigger_error(sprintf('%s:%s must be bigger than 0, %d found', $this->getName(), Properties::LENGTH, $this->getOption(Properties::LENGTH)), E_USER_ERROR);
+            }
+        }
+
+        if (!is_null($this->getOption(Properties::MIN_LENGTH))) {
+            if ($this->getOption(Properties::MIN_LENGTH) < 0) {
+                trigger_error(sprintf('%s:%s can not be negative', $this->getFullName(), Properties::MIN_LENGTH), E_USER_ERROR);
+            }
+        }
+
+        if (!is_null($this->getOption(Properties::MAX_LENGTH)) && $this->getOption(Properties::MAX_LENGTH) <= 0) {
+            trigger_error(sprintf('%s:%s must be bigger than 0', $this->getFullName(), Properties::MAX_LENGTH), E_USER_ERROR);
         }
     }
 }

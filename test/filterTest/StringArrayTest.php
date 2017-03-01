@@ -10,11 +10,8 @@ class StringArrayTest extends TestCase {
      */
     private $validator;
 
-    /**
-     * @before
-     */
-    public function setupTest(){
-        $this->validator = new Validator();
+    public function setUp(){
+        $this->validator = new Validator(true);
         $this->validator->addSchemaValidation('test' . DIRECTORY_SEPARATOR . 'schema' . DIRECTORY_SEPARATOR . 'stringArraySchema.json', "s");
     }
 

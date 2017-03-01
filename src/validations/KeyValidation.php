@@ -132,7 +132,7 @@ abstract class KeyValidation extends Validation {
 
         if (count($intersec) > 0) {
             if (count(array_intersect(array_keys($this->options), $b)) > 0) {
-                trigger_error(join(', ', $a) . ' cant be paired with ' . join(' ,', $b), E_USER_ERROR);
+                trigger_error($this->getFullName() . ' - ' . join(', ', $a) . ' cant be paired with ' . join(' ,', $b), E_USER_ERROR);
             }
         }
     }

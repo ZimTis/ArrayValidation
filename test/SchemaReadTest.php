@@ -30,7 +30,7 @@ class SchemaReadTest extends TestCase {
     /**
      * @expectedException PHPUnit_Framework_Error
      */
-    public function testJsonFileNOtFound(){
+    public function testJsonFileNotFound(){
         $this->validator->addSchemaValidation('test' . DIRECTORY_SEPARATOR . 'schema' . DIRECTORY_SEPARATOR . 'whereAreYou.json');
     }
 

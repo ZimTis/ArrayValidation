@@ -121,4 +121,13 @@ class Properties {
      * @var string
      */
     const END_WITH = 'endWith';
+
+    /**
+     * available for string, integer, float
+     * sets excepted values
+     * must be a array of strings, integer or flaots
+     *
+     * @var string
+     */
+    const ONE_OF = 'oneOf';
 }
