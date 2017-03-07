@@ -7,6 +7,8 @@ use zimtis\arrayvalidation\Properties;
 use zimtis\arrayvalidation\exceptions\ValidationException;
 use zimtis\arrayvalidation\filter\NullableFilter;
 use zimtis\arrayvalidation\Types;
+use zimtis\arrayvalidation\filter\attributeFilter\CallableFilter;
+use zimtis\arrayvalidation\CallableBox;
 
 /**
  * Validates a primitive value like string, int etc.
@@ -15,6 +17,7 @@ use zimtis\arrayvalidation\Types;
  *
  * @since 0.0.1 added
  * @since 0.0.6 rewritten
+ * @since 0.0.9 add support for callable filter
  *
  */
 abstract class KeyValidation extends Validation {
@@ -33,6 +36,14 @@ abstract class KeyValidation extends Validation {
 
     /**
      *
+     * arguments that will be passed to a callable, if there is a callable specified
+     *
+     * @var array
+     */
+    private $callableArguments;
+
+    /**
+     *
      * @param unknown $name
      */
     public function __construct($name, array $options){
@@ -43,8 +54,13 @@ abstract class KeyValidation extends Validation {
         $this->checkForBoolean(Properties::NULLABLE, true);
 
         $this->addFilter(new NullableFilter($this->options[Properties::NULLABLE]));
+
+        $this->checkForString(Properties::CAL_ABLE);
+        $this->options[Properties::CAL_ABLE] = is_null($this->options[Properties::CAL_ABLE]) ? null : new CallableBox($this->options[Properties::CAL_ABLE]);
+
         $this->checkOptions();
         $this->buildFilterChain();
+        $this->addFilter(new CallableFilter($this));
     }
 
     /**
@@ -210,5 +226,36 @@ abstract class KeyValidation extends Validation {
 
     private function triggerTypeCheckError($option, $expected){
         trigger_error(sprintf('%s must be %s, %s found', $option, $expected, gettype($this->options[$option])), E_USER_ERROR);
+    }
+
+    /**
+     *
+     * {@inheritdoc}
+     *
+     * @see \zimtis\arrayvalidation\validations\Validation::getKeyValidationByName()
+     * @return null
+     */
+    public function getKeyValidationByName($route){
+        return null;
+    }
+
+    /**
+     *
+     * @return array
+     */
+    public function getCallableArguments(){
+        return $this->callableArguments;
+    }
+
+    /**
+     *
+     * @param array $arguments
+     */
+    public function setCallableArguments(array $arguments){
+        $this->callableArguments = $arguments;
+    }
+
+    public function setCallable(\Closure $function){
+        $this->options[Properties::CAL_ABLE] = new CallableBox($function);
     }
 }

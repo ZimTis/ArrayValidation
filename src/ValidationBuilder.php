@@ -1,7 +1,7 @@
 <?php
 namespace zimtis\arrayvalidation;
 
-use zimtis\arrayvalidation\validations\NestesValidation;
+use zimtis\arrayvalidation\validations\NestedValidation;
 use zimtis\arrayvalidation\validations\keyValidations\StringValidation;
 use zimtis\arrayvalidation\validations\KeyValidation;
 use zimtis\arrayvalidation\validations\keyValidations\IntegerValidation;
@@ -23,7 +23,7 @@ class ValidationBuilder {
      * @param array $schema
      */
     public static function buildValidation(array $schema, $name = null){
-        $validation = new NestesValidation($name);
+        $validation = new NestedValidation($name);
 
         foreach ($schema as $key => $value ) {
 
@@ -42,7 +42,7 @@ class ValidationBuilder {
      * @param array $value
      * @return boolean
      *
-     * @see NestesValidation
+     * @see NestedValidation
      */
     private static function isNestedValidation(array $value){
         return !(key_exists(Properties::TYPE, $value) && !is_array($value[Properties::TYPE]));

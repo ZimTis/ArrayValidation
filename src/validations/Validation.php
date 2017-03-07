@@ -8,7 +8,7 @@ namespace zimtis\arrayvalidation\validations;
  *
  * @since 0.0.6 added
  * @since 0.0.7 add getFullName method
- *
+ * @since 0.0.9 add support for callable filter
  */
 abstract class Validation {
 
@@ -52,6 +52,7 @@ abstract class Validation {
         return $this->name;
     }
 
+    // FIXME full name should not start with ':'
     public function getFullName(){
         if (is_null($this->parent)) {
             return $this->getName();
@@ -66,5 +67,19 @@ abstract class Validation {
 
     public function getParent(){
         return $this->parent;
+    }
+
+    /**
+     * This method returns a keyalidation(leaf element) with a given name.
+     * Seperate Parent and child names with ':' (root:root:root:leaf)
+     *
+     * @parem string route
+     *
+     * @return NULL|KeyValidation
+     */
+    public function getKeyValidationByName($route){
+        if (!is_string($route)) {
+            throw new \Exception(sprintf('route must be a string, %s given', gettype($route)));
+        }
     }
 }

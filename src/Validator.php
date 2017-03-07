@@ -21,6 +21,7 @@ class Validator {
      * @var array
      */
     private $schemaValidations = array();
+
     /**
      *
      * @var boolean
@@ -48,7 +49,7 @@ class Validator {
         if (file_exists($realpath)) {
             if (!key_exists($realName, $this->schemaValidations)) {
 
-                // TODo write ser file only if not in dev mode
+                // FIXME write ser file only if not in dev mode
                 if ($this->devMode || (!$this->isSerialized($realpath) && !$this->devMode)) {
                     $json = json_decode(file_get_contents($realpath), true);
                     if (is_null($json)) {

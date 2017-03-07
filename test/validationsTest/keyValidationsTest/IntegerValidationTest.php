@@ -3,61 +3,50 @@ use PHPUnit\Framework\TestCase;
 use zimtis\arrayvalidation\validations\keyValidations\IntegerValidation;
 use zimtis\arrayvalidation\Properties;
 
-class IntegerValidationTest extends TestCase
-{
-
+class IntegerValidationTest extends TestCase {
     private $baseProperty;
 
-    public function setUp()
-    {
+    public function setUp(){
         $this->baseProperty = array();
     }
 
-    public function testMinPositive()
-    {
+    public function testMinPositive(){
         $this->baseProperty['min'] = 1;
         new IntegerValidation('name', $this->baseProperty);
     }
 
-    public function testMinZero()
-    {
+    public function testMinZero(){
         $this->baseProperty['min'] = 0;
         new IntegerValidation('name', $this->baseProperty);
     }
 
-    public function testMinNegative()
-    {
-        $this->baseProperty['min'] = - 1;
+    public function testMinNegative(){
+        $this->baseProperty['min'] = -1;
         new IntegerValidation('name', $this->baseProperty);
     }
 
-    public function testMaxPositive()
-    {
+    public function testMaxPositive(){
         $this->baseProperty['max'] = 1;
         new IntegerValidation('name', $this->baseProperty);
     }
 
-    public function testMaxZero()
-    {
+    public function testMaxZero(){
         $this->baseProperty['max'] = 0;
         new IntegerValidation('name', $this->baseProperty);
     }
 
-    public function testMaxNegative()
-    {
-        $this->baseProperty['max'] = - 1;
+    public function testMaxNegative(){
+        $this->baseProperty['max'] = -1;
         new IntegerValidation('name', $this->baseProperty);
     }
 
-    public function testMinSmallerMax()
-    {
+    public function testMinSmallerMax(){
         $this->baseProperty[Properties::MAX] = 2;
         $this->baseProperty[Properties::MIN] = 1;
         new IntegerValidation('name', $this->baseProperty);
     }
 
-    public function testMinEqualMax()
-    {
+    public function testMinEqualMax(){
         $this->baseProperty[Properties::MAX] = 1;
         $this->baseProperty[Properties::MIN] = 1;
         new IntegerValidation('name', $this->baseProperty);
@@ -66,38 +55,31 @@ class IntegerValidationTest extends TestCase
     /**
      * @expectedException PHPUnit_Framework_Error
      */
-    public function testMinBiggerMax()
-    {
+    public function testMinBiggerMax(){
         $this->baseProperty[Properties::MAX] = 1;
         $this->baseProperty[Properties::MIN] = 2;
         new IntegerValidation('name', $this->baseProperty);
     }
 
-    public function testOneOfCorrect()
-    {
+    public function testOneOfCorrect(){
         $this->baseProperty[Properties::ONE_OF] = array(
-            1
-        );
+                                                        1 );
         new IntegerValidation('name', $this->baseProperty);
     }
 
-    public function testOneOfOverride()
-    {
+    public function testOneOfOverride(){
         $this->baseProperty[Properties::ONE_OF] = array(
-            1
-        );
+                                                        1 );
         $this->baseProperty[Properties::MIN] = 5;
         $s = new IntegerValidation('name', $this->baseProperty);
         $s->validate(array(
-            'name' => 1
-        ));
+                            'name' => 1 ));
     }
 
     /**
      * @expectedException PHPUnit_Framework_Error
      */
-    public function testOneOfNotArray()
-    {
+    public function testOneOfNotArray(){
         $this->baseProperty[Properties::ONE_OF] = 5;
 
         new IntegerValidation('name', $this->baseProperty);
@@ -106,8 +88,7 @@ class IntegerValidationTest extends TestCase
     /**
      * @expectedException PHPUnit_Framework_Error
      */
-    public function testOneOfEmptyArray()
-    {
+    public function testOneOfEmptyArray(){
         $this->baseProperty[Properties::ONE_OF] = array();
         new IntegerValidation('name', $this->baseProperty);
     }
@@ -115,11 +96,9 @@ class IntegerValidationTest extends TestCase
     /**
      * @expectedException PHPUnit_Framework_Error
      */
-    public function testOneOfNotInteger()
-    {
+    public function testOneOfNotInteger(){
         $this->baseProperty[Properties::ONE_OF] = array(
-            '1'
-        );
+                                                        '1' );
         new IntegerValidation('name', $this->baseProperty);
     }
 }

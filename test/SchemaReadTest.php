@@ -1,7 +1,7 @@
 <?php
 use PHPUnit\Framework\TestCase;
 use zimtis\arrayvalidation\Validator;
-use zimtis\arrayvalidation\validations\NestesValidation;
+use zimtis\arrayvalidation\validations\NestedValidation;
 use zimtis\arrayvalidation\validations\Validation;
 
 class SchemaReadTest extends TestCase {
@@ -17,7 +17,7 @@ class SchemaReadTest extends TestCase {
      * @before
      */
     public function setupTest(){
-        $this->validator = new Validator();
+        $this->validator = new Validator(true);
     }
 
     /**
@@ -37,7 +37,7 @@ class SchemaReadTest extends TestCase {
     public function testExistingValidJsonFile(){
         $this->validator->addSchemaValidation('test' . DIRECTORY_SEPARATOR . 'schema' . DIRECTORY_SEPARATOR . 'validJson.json');
 
-        $this->assertInstanceOf('zimtis\arrayvalidation\validations\NestesValidation', $this->validator->getSchemaValidationByName('validJson'));
+        $this->assertInstanceOf('zimtis\arrayvalidation\validations\NestedValidation', $this->validator->getSchemaValidationByName('validJson'));
     }
 
     /**
@@ -71,7 +71,7 @@ class SchemaReadTest extends TestCase {
 
         /**
          *
-         * @var NestesValidation $validation
+         * @var NestedValidation $validation
          */
         $validation = $this->validator->getSchemaValidationByName('validJson');
 
@@ -93,7 +93,7 @@ class SchemaReadTest extends TestCase {
 
         /**
          *
-         * @var NestesValidation $validation
+         * @var NestedValidation $validation
          */
         $validation = $this->validator->getSchemaValidationByName('validJsonWithNested');
         $this->assertInstanceOf('zimtis\arrayvalidation\validations\Validation', $validation);
@@ -102,11 +102,11 @@ class SchemaReadTest extends TestCase {
         $this->assertEquals(2, count($v));
 
         $this->assertInstanceOf('zimtis\arrayvalidation\validations\keyValidations\StringValidation', $v[0]);
-        $this->assertInstanceOf('zimtis\arrayvalidation\validations\NestesValidation', $v[1]);
+        $this->assertInstanceOf('zimtis\arrayvalidation\validations\NestedValidation', $v[1]);
 
         /**
          *
-         * @var NestesValidation $nestedValidation
+         * @var NestedValidation $nestedValidation
          */
         $nestedValidation = $v[1];
 
@@ -123,7 +123,7 @@ class SchemaReadTest extends TestCase {
 
         /**
          *
-         * @var NestesValidation $validation
+         * @var NestedValidation $validation
          */
         $validation = $this->validator->getSchemaValidationByName('validJsonWithComplexNested');
         $this->assertInstanceOf('zimtis\arrayvalidation\validations\Validation', $validation);
@@ -132,11 +132,11 @@ class SchemaReadTest extends TestCase {
         $this->assertEquals(2, count($v));
 
         $this->assertInstanceOf('zimtis\arrayvalidation\validations\keyValidations\StringValidation', $v[0]);
-        $this->assertInstanceOf('zimtis\arrayvalidation\validations\NestesValidation', $v[1]);
+        $this->assertInstanceOf('zimtis\arrayvalidation\validations\NestedValidation', $v[1]);
 
         /**
          *
-         * @var NestesValidation $nestedValidation
+         * @var NestedValidation $nestedValidation
          */
         $nestedValidation = $v[1];
 
@@ -146,11 +146,11 @@ class SchemaReadTest extends TestCase {
 
         $this->assertInstanceOf('zimtis\arrayvalidation\validations\keyValidations\FloatValidation', $v2[0]);
         $this->assertInstanceOf('zimtis\arrayvalidation\validations\keyValidations\FloatValidation', $v2[1]);
-        $this->assertInstanceOf('zimtis\arrayvalidation\validations\NestesValidation', $v2[2]);
+        $this->assertInstanceOf('zimtis\arrayvalidation\validations\NestedValidation', $v2[2]);
 
         /**
          *
-         * @var NestesValidation $nestedNestedValidation
+         * @var NestedValidation $nestedNestedValidation
          */
         $nestedNestedValidation = $v2[2];
 

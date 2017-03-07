@@ -10,6 +10,8 @@ namespace zimtis\arrayvalidation;
  * @since 0.0.1 added
  * @since 0.0.6 rewritten
  * @since 0.0.71 renamed to Properties
+ * @since 0.0.8 add oneOf
+ * @since 0.0.9 add callable
  */
 class Properties {
 
@@ -130,4 +132,11 @@ class Properties {
      * @var string
      */
     const ONE_OF = 'oneOf';
+
+    /**
+     * sets a callable function, for custom validation by the user
+     *
+     * @var string
+     */
+    const CAL_ABLE = 'callable';
 }

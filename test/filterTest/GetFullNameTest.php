@@ -1,6 +1,6 @@
 <?php
 use PHPUnit\Framework\TestCase;
-use zimtis\arrayvalidation\validations\NestesValidation;
+use zimtis\arrayvalidation\validations\NestedValidation;
 use zimtis\arrayvalidation\validations\keyValidations\StringValidation;
 
 /**
@@ -11,8 +11,8 @@ use zimtis\arrayvalidation\validations\keyValidations\StringValidation;
 class GetFullNameTest extends TestCase {
 
     public function testFullName(){
-        $nestedA = new NestesValidation("a");
-        $nestedB = new NestesValidation("b");
+        $nestedA = new NestedValidation("a");
+        $nestedB = new NestedValidation("b");
 
         $keyValidationC = new StringValidation("c", array(
                                                         "type" => "string" ));
