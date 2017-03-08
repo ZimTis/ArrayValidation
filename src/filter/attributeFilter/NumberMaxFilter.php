@@ -43,6 +43,6 @@ class NumberMaxFilter extends Filter {
                 break;
         }
 
-        return sprintf('must be smaller ot equal %s, %s found', $type, $type);
+        return sprintf('must be smaller or equal %s, %s found', $type, $type);
     }
 }
