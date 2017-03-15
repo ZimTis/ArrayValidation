@@ -48,8 +48,7 @@ class Validator {
 
         if (file_exists($realpath)) {
             if (!key_exists($realName, $this->schemaValidations)) {
-
-                // FIXME write ser file only if not in dev mode
+                // TODO can we do it better?
                 if ($this->devMode || (!$this->isSerialized($realpath) && !$this->devMode)) {
                     $json = json_decode(file_get_contents($realpath), true);
                     if (is_null($json)) {
@@ -58,7 +57,9 @@ class Validator {
 
                     $validation = ValidationBuilder::buildValidation($json);
 
-                    file_put_contents($realpath . '.ser', serialize($validation));
+                    if (!$this->devMode) {
+                        file_put_contents($realpath . '.ser', serialize($validation));
+                    }
 
                     $this->schemaValidations[$realName] = $validation;
                 } else {

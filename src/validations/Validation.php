@@ -52,13 +52,19 @@ abstract class Validation {
         return $this->name;
     }
 
-    // FIXME full name should not start with ':'
+    /**
+     * returns the fully qualified name of this validation.
+     * Seperated by :
+     *
+     * @return string
+     */
     public function getFullName(){
+        // TODO make it better
         if (is_null($this->parent)) {
             return $this->getName();
         }
 
-        return $this->parent->getFullName() . ':' . $this->getName();
+        return (!is_null($this->parent->getFullName()) ? ($this->parent->getFullName() . ':') : '') . $this->getName();
     }
 
     public function setParent(Validation $parent){
