@@ -6,7 +6,7 @@ use zimtis\arrayvalidation\filter\Filter;
 /**
  *
  * @author ZimTis
- *
+ *        
  * @since 0.0.8 added
  */
 class OneOfFilter extends Filter

@@ -1,25 +1,31 @@
 <?php
 namespace zimtis\test;
 
-class TestUtil {
+class TestUtil
+{
 
-    private static function getBaseSchemaPath(){
+    private static function getBaseSchemaPath()
+    {
         return 'test' . DIRECTORY_SEPARATOR . 'schema';
     }
 
-    public static function getPathOfSchem(){
+    public static function getPathOfSchem()
+    {
         return self::getBaseSchemaPath();
     }
 
-    public static function getPathAndFileNameOfSchema($filename){
+    public static function getPathAndFileNameOfSchema($filename)
+    {
         return self::getPathOfSchem() . DIRECTORY_SEPARATOR . $filename;
     }
 
-    public static function getPathOfDevelopModeTestSchema(){
+    public static function getPathOfDevelopModeTestSchema()
+    {
         return self::getBaseSchemaPath() . DIRECTORY_SEPARATOR . 'developModeTest';
     }
 
-    public static function getPathAndFileNameOfDevelopModeTestSchema($filename){
+    public static function getPathAndFileNameOfDevelopModeTestSchema($filename)
+    {
         return self::getPathOfDevelopModeTestSchema() . DIRECTORY_SEPARATOR . $filename;
     }
 }

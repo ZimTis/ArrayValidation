@@ -3,7 +3,8 @@ use PHPUnit\Framework\TestCase;
 use zimtis\arrayvalidation\filter\Filter;
 use zimtis\arrayvalidation\filter\attributeFilter\StringStartsWithFilter;
 
-class StringStartsWithFilterTest extends TestCase {
+class StringStartsWithFilterTest extends TestCase
+{
 
     /**
      *
@@ -14,11 +15,13 @@ class StringStartsWithFilterTest extends TestCase {
     /**
      * @before
      */
-    public function setupTest(){
+    public function setupTest()
+    {
         $this->filter = new StringStartsWithFilter('test');
     }
 
-    public function testValidation(){
+    public function testValidation()
+    {
         $this->filter->validate('testa');
         $this->filter->validate('test');
     }
@@ -26,14 +29,16 @@ class StringStartsWithFilterTest extends TestCase {
     /**
      * @expectedException \Exception
      */
-    public function testValidationNotCorrect1(){
+    public function testValidationNotCorrect1()
+    {
         $this->filter->validate("Test");
     }
 
     /**
      * @expectedException \Exception
      */
-    public function testValidationNotCorrect2(){
+    public function testValidationNotCorrect2()
+    {
         $this->filter->validate("tes");
     }
 }

@@ -5,12 +5,13 @@ namespace zimtis\arrayvalidation\validations;
  * Responsable for validating one key schema
  *
  * @author ZimTis
- *
+ *        
  * @since 0.0.6 added
  * @since 0.0.7 add getFullName method
  * @since 0.0.9 add support for callable filter
  */
-abstract class Validation {
+abstract class Validation
+{
 
     /**
      *
@@ -26,9 +27,10 @@ abstract class Validation {
 
     /**
      *
-     * @param string $name
+     * @param string $name            
      */
-    public function __construct($name){
+    public function __construct($name)
+    {
         $this->name = $name;
     }
 
@@ -36,10 +38,11 @@ abstract class Validation {
 
     /**
      *
-     * @param string $name
+     * @param string $name            
      * @return \zimtis\arrayvalidation\validations\Validation
      */
-    public function setName($name){
+    public function setName($name)
+    {
         $this->name;
         return $this;
     }
@@ -48,7 +51,8 @@ abstract class Validation {
      *
      * @return string
      */
-    public function getName(){
+    public function getName()
+    {
         return $this->name;
     }
 
@@ -58,20 +62,23 @@ abstract class Validation {
      *
      * @return string
      */
-    public function getFullName(){
+    public function getFullName()
+    {
         // TODO make it better
         if (is_null($this->parent)) {
             return $this->getName();
         }
-
-        return (!is_null($this->parent->getFullName()) ? ($this->parent->getFullName() . ':') : '') . $this->getName();
+        
+        return (! is_null($this->parent->getFullName()) ? ($this->parent->getFullName() . ':') : '') . $this->getName();
     }
 
-    public function setParent(Validation $parent){
+    public function setParent(Validation $parent)
+    {
         $this->parent = $parent;
     }
 
-    public function getParent(){
+    public function getParent()
+    {
         return $this->parent;
     }
 
@@ -83,8 +90,9 @@ abstract class Validation {
      *
      * @return NULL|KeyValidation
      */
-    public function getKeyValidationByName($route){
-        if (!is_string($route)) {
+    public function getKeyValidationByName($route)
+    {
+        if (! is_string($route)) {
             throw new \Exception(sprintf('route must be a string, %s given', gettype($route)));
         }
     }

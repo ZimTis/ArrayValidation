@@ -4,11 +4,13 @@ namespace zimtis\arrayvalidation;
 /**
  *
  * @author ZimTis
- *
+ *        
  * @since 0.0.9 added
- *
+ *       
  */
-class CallableBox {
+class CallableBox
+{
+
     /**
      * Contains the information for the callback, can be a closure or a string with fully qualified name of a function
      * /namespace/function | function
@@ -22,31 +24,35 @@ class CallableBox {
      */
     private $callable;
 
-    public function __construct($callable){
+    public function __construct($callable)
+    {
         if ($callable instanceof \Closure) {
             $this->callable = $callable;
-        } else if (is_string($callable)) {
-            $result = array();
-            $patter = "/^([a-zA-Z0-9_\\\]+?):([a-zA-Z0-9_]+?)$/";
-            preg_match($patter, trim($callable), $result);
-
-            if (count($result) != 0) {
-                $this->callable = array(
-                                        $result[1],
-                                        $result[2] );
+        } else 
+            if (is_string($callable)) {
+                $result = array();
+                $patter = "/^([a-zA-Z0-9_\\\]+?):([a-zA-Z0-9_]+?)$/";
+                preg_match($patter, trim($callable), $result);
+                
+                if (count($result) != 0) {
+                    $this->callable = array(
+                        $result[1],
+                        $result[2]
+                    );
+                } else {
+                    $this->callable = $callable;
+                }
             } else {
-                $this->callable = $callable;
+                $this->callable = null;
             }
-        } else {
-            $this->callable = null;
-        }
     }
 
     /**
      *
      * @return mixed
      */
-    public function getCallable(){
+    public function getCallable()
+    {
         return $this->callable;
     }
 }

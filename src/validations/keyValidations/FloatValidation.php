@@ -11,7 +11,7 @@ use zimtis\arrayvalidation\filter\attributeFilter\OneOfFilter;
 /**
  *
  * @author ZimTis
- *
+ *        
  * @since 0.0.6 added
  * @since 0.0.8 add oneOf
  */
@@ -33,7 +33,7 @@ class FloatValidation extends KeyValidation
             if (! is_null($this->getOption(Properties::MIN))) {
                 $this->addFilter(new NumberMinFilter($this->getOption(Properties::MIN)));
             }
-
+            
             if (! is_null($this->getOption(Properties::MAX))) {
                 $this->addFilter(new NumberMaxFilter($this->getOption(Properties::MAX)));
             }
@@ -50,9 +50,9 @@ class FloatValidation extends KeyValidation
     {
         $this->checkForIntOrFloat(Properties::MIN);
         $this->checkForIntOrFloat(Properties::MAX);
-
+        
         $this->checkForArray(Properties::ONE_OF);
-
+        
         if (! is_null($this->getOption(Properties::ONE_OF))) {
             if (count($this->getOption(Properties::ONE_OF)) == 0) {
                 trigger_error(sprintf('%s must contain at least one item', Properties::ONE_OF), E_USER_ERROR);
@@ -63,7 +63,7 @@ class FloatValidation extends KeyValidation
                 }
             }
         }
-
+        
         if (! is_null($this->getOption(Properties::MAX)) && ! is_null($this->getOptions(Properties::MIN))) {
             if ($this->getOption(Properties::MAX) < $this->getOption(Properties::MIN)) {
                 trigger_error(sprintf('%s:%s must be bigger than %s:%s', $this->getFullName(), Properties::MAX, $this->getFullName(), Properties::MIN), E_USER_ERROR);

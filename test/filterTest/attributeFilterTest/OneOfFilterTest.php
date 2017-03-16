@@ -57,7 +57,7 @@ class OneOfFilterTest extends TestCase
             1,
             2
         ));
-
+        
         $f->validate(1);
     }
 

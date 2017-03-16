@@ -16,7 +16,7 @@ use zimtis\arrayvalidation\filter\attributeFilter\OneOfFilter;
  * Validates a String
  *
  * @author ZimTis
- *
+ *        
  * @since 0.0.1 added
  * @since 0.0.6 rewritten
  * @since 0.0.8 add oneOf
@@ -39,23 +39,23 @@ class StringValidation extends KeyValidation
             if (! is_null($this->getOption(Properties::MIN_LENGTH))) {
                 $this->addFilter(new StringMinLengthFilter($this->getOption(Properties::MIN_LENGTH)));
             }
-
+            
             if (! is_null($this->getOption(Properties::MAX_LENGTH))) {
                 $this->addFilter(new StringMaxLengthFilter($this->getOption(Properties::MAX_LENGTH)));
             }
-
+            
             if (! is_null($this->getOption(Properties::LENGTH))) {
                 $this->addFilter(new StringLengthFilter($this->getOption(Properties::LENGTH)));
             }
-
+            
             if (! is_null($this->getOption(Properties::START_WITH))) {
                 $this->addFilter(new StringStartsWithFilter($this->getOption(Properties::START_WITH)));
             }
-
+            
             if (! is_null($this->getOption(Properties::END_WITH))) {
                 $this->addFilter(new StringEndsWithFilter($this->getOption(Properties::END_WITH)));
             }
-
+            
             $this->addFilter(new StringTrimmedFilter($this->getOption(Properties::TRIMMED)));
         }
     }
@@ -74,7 +74,7 @@ class StringValidation extends KeyValidation
             Properties::MAX_LENGTH,
             Properties::MIN_LENGTH
         ));
-
+        
         $this->checkForInt(Properties::MIN_LENGTH);
         $this->checkForInt(Properties::MAX_LENGTH);
         $this->checkForInt(Properties::LENGTH);
@@ -82,7 +82,7 @@ class StringValidation extends KeyValidation
         $this->checkForString(Properties::START_WITH);
         $this->checkForString(Properties::END_WITH);
         $this->checkForArray(Properties::ONE_OF);
-
+        
         if (! is_null($this->getOption(Properties::ONE_OF))) {
             foreach ($this->getOption(Properties::ONE_OF) as $s) {
                 if (! is_string($s)) {
@@ -90,13 +90,13 @@ class StringValidation extends KeyValidation
                 }
             }
         }
-
+        
         if (! is_null($this->getOption(Properties::MAX_LENGTH)) && ! is_null($this->getOption(Properties::MIN_LENGTH))) {
             if ($this->getOption(Properties::MAX_LENGTH) < $this->getOption(Properties::MIN_LENGTH)) {
                 trigger_error(Properties::MAX_LENGTH . ' must be bigger than ' . Properties::MIN_LENGTH, E_USER_ERROR);
             }
         }
-
+        
         // TODO check that starWith and endWith are not in vialation with lengt, minLength, maxLength or trimmed
     }
 }

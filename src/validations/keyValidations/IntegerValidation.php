@@ -11,7 +11,7 @@ use zimtis\arrayvalidation\filter\attributeFilter\OneOfFilter;
 /**
  *
  * @author ZimTis
- *
+ *        
  * @since 0.0.1 added
  * @since 0.0.6 rewritten
  * @since 0.0.8 add oneOf
@@ -28,14 +28,14 @@ class IntegerValidation extends KeyValidation
     protected function buildFilterChain()
     {
         $this->addFilter(new IntegerTypeFilter());
-
+        
         if (! is_null($this->getOption(Properties::ONE_OF))) {
             $this->addFilter(new OneOfFilter($this->getOption(Properties::ONE_OF)));
         } else {
             if (! is_null($this->getOption(Properties::MIN))) {
                 $this->addFilter(new NumberMinFilter($this->getOption(Properties::MIN)));
             }
-
+            
             if (! is_null($this->getOption(Properties::MAX))) {
                 $this->addFilter(new NumberMaxFilter($this->getOption(Properties::MAX)));
             }
@@ -52,9 +52,9 @@ class IntegerValidation extends KeyValidation
     {
         $this->checkForInt(Properties::MIN);
         $this->checkForInt(Properties::MAX);
-
+        
         $this->checkForArray(Properties::ONE_OF);
-
+        
         if (! is_null($this->getOption(Properties::ONE_OF))) {
             if (count($this->getOption(Properties::ONE_OF)) == 0) {
                 trigger_error(sprintf('%s must contain at least one item', Properties::ONE_OF), E_USER_ERROR);
@@ -65,7 +65,7 @@ class IntegerValidation extends KeyValidation
                 }
             }
         }
-
+        
         if (! is_null($this->getOption(Properties::MAX)) && ! is_null($this->getOptions(Properties::MIN))) {
             if ($this->getOption(Properties::MAX) < $this->getOption(Properties::MIN)) {
                 trigger_error(Properties::MAX . ' must be bigger than ' . Properties::MIN, E_USER_ERROR);

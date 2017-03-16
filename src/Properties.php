@@ -6,14 +6,15 @@ namespace zimtis\arrayvalidation;
  * "Enum" of every possible Property
  *
  * @author ZimTis
- *
+ *        
  * @since 0.0.1 added
  * @since 0.0.6 rewritten
  * @since 0.0.71 renamed to Properties
  * @since 0.0.8 add oneOf
  * @since 0.0.9 add callable
  */
-class Properties {
+class Properties
+{
 
     /**
      * Required type if the value, must be set

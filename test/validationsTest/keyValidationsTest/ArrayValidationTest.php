@@ -2,32 +2,40 @@
 use PHPUnit\Framework\TestCase;
 use zimtis\arrayvalidation\validations\keyValidations\ArrayValidation;
 
-class ArrayValidationTest extends TestCase {
+class ArrayValidationTest extends TestCase
+{
+
     private $baseOptions;
 
-    public function setUp(){
+    public function setUp()
+    {
         $this->baseOptions = array(
-                                'item' => array(
-                                                'type' => 'string' ) );
+            'item' => array(
+                'type' => 'string'
+            )
+        );
     }
 
     /**
      * @expectedException PHPUnit_Framework_Error
      */
-    public function testNegativeLength(){
-        $this->baseOptions['length'] = -1;
+    public function testNegativeLength()
+    {
+        $this->baseOptions['length'] = - 1;
         new ArrayValidation('name', $this->baseOptions);
     }
 
     /**
      * @expectedException PHPUnit_Framework_Error
      */
-    public function testLengthZero(){
+    public function testLengthZero()
+    {
         $this->baseOptions['length'] = 0;
         new ArrayValidation('name', $this->baseOptions);
     }
 
-    public function testLengthPositive(){
+    public function testLengthPositive()
+    {
         $this->baseOptions['length'] = 1;
         new ArrayValidation('name', $this->baseOptions);
     }
@@ -35,17 +43,20 @@ class ArrayValidationTest extends TestCase {
     /**
      * @expectedException PHPUnit_Framework_Error
      */
-    public function testMinLengthNegative(){
-        $this->baseOptions['minLength'] = -1;
+    public function testMinLengthNegative()
+    {
+        $this->baseOptions['minLength'] = - 1;
         new ArrayValidation('name', $this->baseOptions);
     }
 
-    public function testMinLengthZero(){
+    public function testMinLengthZero()
+    {
         $this->baseOptions['minLength'] = 0;
         new ArrayValidation('name', $this->baseOptions);
     }
 
-    public function testMinLengthPositive(){
+    public function testMinLengthPositive()
+    {
         $this->baseOptions['minLength'] = 1;
         new ArrayValidation('name', $this->baseOptions);
     }
@@ -53,20 +64,23 @@ class ArrayValidationTest extends TestCase {
     /**
      * @expectedException PHPUnit_Framework_Error
      */
-    public function testMaxLengthNegative(){
-        $this->baseOptions['maxLength'] = -1;
+    public function testMaxLengthNegative()
+    {
+        $this->baseOptions['maxLength'] = - 1;
         new ArrayValidation('name', $this->baseOptions);
     }
 
     /**
      * @expectedException PHPUnit_Framework_Error
      */
-    public function testMaxLengthZero(){
+    public function testMaxLengthZero()
+    {
         $this->baseOptions['maxLength'] = 0;
         new ArrayValidation('name', $this->baseOptions);
     }
 
-    public function testMaxLengthPositive(){
+    public function testMaxLengthPositive()
+    {
         $this->baseOptions['maxLength'] = 1;
         new ArrayValidation('name', $this->baseOptions);
     }
@@ -74,7 +88,8 @@ class ArrayValidationTest extends TestCase {
     /**
      * @expectedException PHPUnit_Framework_Error
      */
-    public function testLengthWithMinLength(){
+    public function testLengthWithMinLength()
+    {
         $this->baseOptions['length'] = 1;
         $this->baseOptions['minLength'] = 1;
         new ArrayValidation('name', $this->baseOptions);
@@ -83,7 +98,8 @@ class ArrayValidationTest extends TestCase {
     /**
      * @expectedException PHPUnit_Framework_Error
      */
-    public function testLengthWithMaxLength(){
+    public function testLengthWithMaxLength()
+    {
         $this->baseOptions['length'] = 1;
         $this->baseOptions['maxLength'] = 1;
         new ArrayValidation('name', $this->baseOptions);
@@ -92,7 +108,8 @@ class ArrayValidationTest extends TestCase {
     /**
      * @expectedException PHPUnit_Framework_Error
      */
-    public function testLengthWithMaxAndMinLength(){
+    public function testLengthWithMaxAndMinLength()
+    {
         $this->baseOptions['length'] = 1;
         $this->baseOptions['maxLength'] = 2;
         $this->baseOptions['minLength'] = 1;

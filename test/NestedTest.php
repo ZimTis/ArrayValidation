@@ -2,7 +2,9 @@
 use PHPUnit\Framework\TestCase;
 use zimtis\arrayvalidation\Validator;
 
-class NestedTest extends TestCase {
+class NestedTest extends TestCase
+{
+
     /**
      *
      * @var Validator
@@ -12,7 +14,8 @@ class NestedTest extends TestCase {
     /**
      * @before
      */
-    public function setUpTest(){
+    public function setUpTest()
+    {
         $this->validator = new Validator(true);
         $this->validator->addSchemaValidation('test' . DIRECTORY_SEPARATOR . 'schema' . DIRECTORY_SEPARATOR . 'validNestedWithRequiredInNested.json', 'a');
     }
@@ -20,9 +23,10 @@ class NestedTest extends TestCase {
     /**
      * @expectedException zimtis\arrayvalidation\exceptions\ValidationException
      */
-    public function testNestedWithRequired(){
+    public function testNestedWithRequired()
+    {
         $a = array();
-
+        
         $this->validator->validate('a', $a);
     }
 }

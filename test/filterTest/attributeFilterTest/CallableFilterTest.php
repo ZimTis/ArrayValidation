@@ -4,93 +4,108 @@ use zimtis\arrayvalidation\validations\keyValidations\StringValidation;
 use zimtis\test\CallableUtil;
 use zimtis\arrayvalidation\filter\attributeFilter\CallableFilter;
 
-class CallableFilterTest extends TestCase {
+class CallableFilterTest extends TestCase
+{
 
-    public function testNonStaticFilterBooleanResult(){
+    public function testNonStaticFilterBooleanResult()
+    {
         $s = new StringValidation('name', array(
-                                                'callable' => '\zimtis\test\CallableUtil:trueNonStaticFunction' ));
-
+            'callable' => '\zimtis\test\CallableUtil:trueNonStaticFunction'
+        ));
+        
         $filter = new CallableFilter($s);
-
+        
         $filter->validate('s');
     }
 
     /**
      * @expectedException \Exception
      */
-    public function testNonStaticFilterNoBooleanResult(){
+    public function testNonStaticFilterNoBooleanResult()
+    {
         $s = new StringValidation('name', array(
-                                                'callable' => '\zimtis\test\CallableUtil:nonBooleanNonStaticFunction' ));
-
+            'callable' => '\zimtis\test\CallableUtil:nonBooleanNonStaticFunction'
+        ));
+        
         $filter = new CallableFilter($s);
-
+        
         $filter->validate('S');
     }
 
-    public function testStaticFilterBooleanResult(){
+    public function testStaticFilterBooleanResult()
+    {
         $s = new StringValidation('name', array(
-                                                'callable' => '\zimtis\test\CallableUtil::trueStaticFunction' ));
-
+            'callable' => '\zimtis\test\CallableUtil::trueStaticFunction'
+        ));
+        
         $filter = new CallableFilter($s);
-
+        
         $filter->validate('s');
     }
 
     /**
      * @expectedException \Exception
      */
-    public function testStaticFilterNoBooleanResult(){
+    public function testStaticFilterNoBooleanResult()
+    {
         $s = new StringValidation('name', array(
-                                                'callable' => '\zimtis\test\CallableUtil::nonBooleanStaticFunction' ));
-
+            'callable' => '\zimtis\test\CallableUtil::nonBooleanStaticFunction'
+        ));
+        
         $filter = new CallableFilter($s);
-
+        
         $filter->validate('S');
     }
 
-    public function testClosureFilterBooleanResult(){
+    public function testClosureFilterBooleanResult()
+    {
         $s = new StringValidation('name', array());
-        $s->setCallable(function (){
+        $s->setCallable(function () {
             return true;
         });
-
+        
         $filter = new CallableFilter($s);
-
+        
         $filter->validate('s');
     }
 
     /**
      * @expectedException \Exception
      */
-    public function testClosureFilterNoBooleanResult(){
+    public function testClosureFilterNoBooleanResult()
+    {
         $s = new StringValidation('name', array());
-        $s->setCallable(function (){
+        $s->setCallable(function () {
             return 'S';
         });
-
+        
         $filter = new CallableFilter($s);
-
+        
         $filter->validate('S');
     }
 
-    public function testFunctionFilterBooleanResult(){
+    public function testFunctionFilterBooleanResult()
+    {
         $s = new StringValidation('name', array(
-                                                'callable' => '\zimtis\test\trueFunction' ));
-
+            'callable' => '\zimtis\test\trueFunction'
+        ));
+        
         $filter = new CallableFilter($s);
-
+        
         $filter->validate('s');
     }
 
     /**
      * @expectedException \Exception
      */
-    public function testFunctionFilterNoBooleanResult(){
+    public function testFunctionFilterNoBooleanResult()
+    {
         $s = new StringValidation('name', array(
-                                                'callable' => '\zimtis\test\nonBooleanFunction' ));
-
+            'callable' => '\zimtis\test\nonBooleanFunction'
+        ));
+        
         $filter = new CallableFilter($s);
-
+        
         $filter->validate('S');
     }
 }
