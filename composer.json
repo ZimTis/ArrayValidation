@@ -15,7 +15,7 @@
 	},
 	"name" : "zimtis/array-validation",
 	"type" : "library",
-	"description" : "A library to validate the contens of an array",
+	"description" : "A library to validate the content of an array",
 	"require" : {
 		"php" : ">=5.3"
 	},
