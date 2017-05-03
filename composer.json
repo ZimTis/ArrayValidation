@@ -13,16 +13,16 @@
 			"zimtis\\test\\" : "test"
 		}
 	},
-	"name" : "zimtis/arrayvalidation",
+	"name" : "zimtis/array-validation",
 	"type" : "library",
 	"description" : "A library to validate the contens of an array",
 	"require" : {
 		"php" : ">=5.3"
 	},
 	"support" : {
-		"source" : "https://github.com/ZimTis/ArrayValidation",
-		"issues" : "https://github.com/ZimTis/ArrayValidation/issues",
-		"wiki" : "https://github.com/ZimTis/ArrayValidation/wiki"
+		"source" : "https://github.com/ZimTis/array-validation",
+		"issues" : "https://github.com/ZimTis/array-validation/issues",
+		"wiki" : "https://github.com/ZimTis/array-validation/wiki"
 	},
 	"require-dev" : {
 		"php" : ">=5.6",
