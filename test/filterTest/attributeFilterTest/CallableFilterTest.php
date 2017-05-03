@@ -3,6 +3,7 @@ use PHPUnit\Framework\TestCase;
 use zimtis\arrayvalidation\validations\keyValidations\StringValidation;
 use zimtis\test\CallableUtil;
 use zimtis\arrayvalidation\filter\attributeFilter\CallableFilter;
+use zimtis\arrayvalidation\model\CallableResult;
 
 class CallableFilterTest extends TestCase
 {
@@ -12,9 +13,9 @@ class CallableFilterTest extends TestCase
         $s = new StringValidation('name', array(
             'callable' => '\zimtis\test\CallableUtil:trueNonStaticFunction'
         ));
-        
+
         $filter = new CallableFilter($s);
-        
+
         $filter->validate('s');
     }
 
@@ -26,9 +27,9 @@ class CallableFilterTest extends TestCase
         $s = new StringValidation('name', array(
             'callable' => '\zimtis\test\CallableUtil:nonBooleanNonStaticFunction'
         ));
-        
+
         $filter = new CallableFilter($s);
-        
+
         $filter->validate('S');
     }
 
@@ -37,9 +38,9 @@ class CallableFilterTest extends TestCase
         $s = new StringValidation('name', array(
             'callable' => '\zimtis\test\CallableUtil::trueStaticFunction'
         ));
-        
+
         $filter = new CallableFilter($s);
-        
+
         $filter->validate('s');
     }
 
@@ -51,21 +52,23 @@ class CallableFilterTest extends TestCase
         $s = new StringValidation('name', array(
             'callable' => '\zimtis\test\CallableUtil::nonBooleanStaticFunction'
         ));
-        
+
         $filter = new CallableFilter($s);
-        
+
         $filter->validate('S');
     }
 
-    public function testClosureFilterBooleanResult()
+    public function testClosureFilterCallableResult()
     {
         $s = new StringValidation('name', array());
         $s->setCallable(function () {
-            return true;
+            $r = new CallableResult();
+            $r->setResult(true);
+            return $r;
         });
-        
+
         $filter = new CallableFilter($s);
-        
+
         $filter->validate('s');
     }
 
@@ -78,9 +81,9 @@ class CallableFilterTest extends TestCase
         $s->setCallable(function () {
             return 'S';
         });
-        
+
         $filter = new CallableFilter($s);
-        
+
         $filter->validate('S');
     }
 
@@ -89,9 +92,9 @@ class CallableFilterTest extends TestCase
         $s = new StringValidation('name', array(
             'callable' => '\zimtis\test\trueFunction'
         ));
-        
+
         $filter = new CallableFilter($s);
-        
+
         $filter->validate('s');
     }
 
@@ -103,9 +106,9 @@ class CallableFilterTest extends TestCase
         $s = new StringValidation('name', array(
             'callable' => '\zimtis\test\nonBooleanFunction'
         ));
-        
+
         $filter = new CallableFilter($s);
-        
+
         $filter->validate('S');
     }
 }

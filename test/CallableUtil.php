@@ -1,14 +1,20 @@
 <?php
 namespace zimtis\test;
 
+use zimtis\arrayvalidation\model\CallableResult;
+
 function trueFunction($value, array $parameter)
 {
-    return true;
+    $r = new CallableResult();
+    $r->setResult(true);
+    return $r;
 }
 
 function falseFunction($value, array $parameter)
 {
-    return false;
+    $r = new CallableResult();
+    $r->setResult(false);
+    return $r;
 }
 
 function nonBooleanFunction($value, array $parameter)
@@ -21,12 +27,16 @@ class CallableUtil
 
     public static function trueStaticFunction($value, array $parameter)
     {
-        return true;
+        $r = new CallableResult();
+        $r->setResult(true);
+        return $r;
     }
 
     public static function falseStaticFunction($value, array $parameter)
     {
-        return false;
+        $r = new CallableResult();
+        $r->setResult(false);
+        return $r;
     }
 
     public static function nonBooleanStaticFunction($value, array $parameter)
@@ -36,12 +46,16 @@ class CallableUtil
 
     public function trueNonStaticFunction($value, array $parameter)
     {
-        return true;
+        $r = new CallableResult();
+        $r->setResult(true);
+        return $r;
     }
 
     public function falseNonStaticFunction($value, array $parameter)
     {
-        return false;
+        $r = new CallableResult();
+        $r->setResult(false);
+        return $r;
     }
 
     public function nonBooleanNonStaticFunction($value, array $parameter)

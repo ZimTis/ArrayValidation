@@ -5,6 +5,7 @@ use zimtis\arrayvalidation\filter\Filter;
 use zimtis\arrayvalidation\validations\KeyValidation;
 use zimtis\arrayvalidation\Properties;
 use zimtis\arrayvalidation\CallableBox;
+use zimtis\arrayvalidation\model\CallableResult;
 
 /**
  *
@@ -43,18 +44,15 @@ class CallableFilter extends Filter
         $arguments = $this->keyValidator->getCallableArguments();
         $arguments = is_null($arguments) || ! is_array($arguments) ? array() : $arguments;
         if ($callable instanceof CallableBox) {
-
-            // if callable is a string, resolve the string, eather as a static call to a functio or a non static call to a functio of a class
-            // if call to a function, static function, or using the closure, user below code
-            // $result = call_user_func($callable, $value, $arguments);
-
             // otherwhise, use below code
             $result = call_user_func($callable->getCallable(), $value, $arguments);
-            if (! is_bool($result)) {
-                throw new \Exception(sprintf('%s , Callable must return a boolean', $this->keyValidator->getFullName()));
-            }
-            if (! $result) {
-                throw new \Exception(sprintf('%s , Callable returnes false', $this->keyValidator->getFullName()));
+
+            if ($result instanceof CallableResult) {
+                if (! $result->getResult()) {
+                    throw new \Exception(sprintf('%s , Callable returnes false, %s', $this->keyValidator->getFullName(), $result->getErrorString()));
+                }
+            } else {
+                throw new \Exception(sprintf('%s , Callable must return a CallableResult', $this->keyValidator->getFullName()));
             }
         }
 
