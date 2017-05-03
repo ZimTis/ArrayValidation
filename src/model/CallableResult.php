@@ -1,6 +1,12 @@
 <?php
 namespace zimtis\arrayvalidation\model;
 
+/**
+ *
+ * @author ZimTis
+ *
+ * @since 0.9.2 added
+ */
 class CallableResult
 {
 

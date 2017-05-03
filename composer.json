@@ -1,29 +1,32 @@
 {
-	"keywords": [
+	"keywords" : [
 		"array",
 		"validation"
 	],
-	"autoload": {
-		"psr-4": {
+	"autoload" : {
+		"psr-4" : {
 			"zimtis\\arrayvalidation\\" : "src"
 		}
 	},
-	"autoload-dev": {
-		"psr-4": {
+	"autoload-dev" : {
+		"psr-4" : {
 			"zimtis\\test\\" : "test"
 		}
 	},
-	"name": "zimtis/arrayvalidation",
-	"type": "library",
-	"description": "A library to validate the contens of an array",
-	"require": {
-		"php": ">=5.3"
+	"name" : "zimtis/arrayvalidation",
+	"type" : "library",
+	"description" : "A library to validate the contens of an array",
+	"require" : {
+		"php" : ">=5.3"
 	},
-	"support": {
-		"source": "https://github.com/ZimTis/ArrayValidation"
+	"support" : {
+		"source" : "https://github.com/ZimTis/ArrayValidation",
+		"issues" : "https://github.com/ZimTis/ArrayValidation/issues",
+		"wiki" : "https://github.com/ZimTis/ArrayValidation/wiki"
 	},
-	"require-dev": {
-		"php": ">=5.6",
-		"phpunit/phpunit": "5.5.*"
-	}
+	"require-dev" : {
+		"php" : ">=5.6",
+		"phpunit/phpunit" : "5.5.*"
+	},
+	"license" : "MIT"
 }

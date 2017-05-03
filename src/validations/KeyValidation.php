@@ -14,11 +14,11 @@ use zimtis\arrayvalidation\CallableBox;
  * Validates a primitive value like string, int etc.
  *
  * @author ZimTis
- *        
+ *
  * @since 0.0.1 added
  * @since 0.0.6 rewritten
  * @since 0.0.9 add support for callable filter
- *       
+ *
  */
 abstract class KeyValidation extends Validation
 {
@@ -45,21 +45,21 @@ abstract class KeyValidation extends Validation
 
     /**
      *
-     * @param unknown $name            
+     * @param unknown $name
      */
     public function __construct($name, array $options)
     {
         parent::__construct($name);
         $this->options = $options;
-        
+
         $this->checkForBoolean(Properties::REQUIRED);
         $this->checkForBoolean(Properties::NULLABLE, true);
-        
+
         $this->addFilter(new NullableFilter($this->options[Properties::NULLABLE]));
-        
-        $this->checkForString(Properties::CAL_ABLE);
-        $this->options[Properties::CAL_ABLE] = is_null($this->options[Properties::CAL_ABLE]) ? null : new CallableBox($this->options[Properties::CAL_ABLE]);
-        
+
+        $this->checkForString(Properties::CALL_ABLE);
+        $this->options[Properties::CALL_ABLE] = is_null($this->options[Properties::CALL_ABLE]) ? null : new CallableBox($this->options[Properties::CALL_ABLE]);
+
         $this->checkOptions();
         $this->buildFilterChain();
         $this->addFilter(new CallableFilter($this));
@@ -76,7 +76,7 @@ abstract class KeyValidation extends Validation
         if ($this->options[Properties::REQUIRED] && ! key_exists($this->getName(), $value)) {
             throw new ValidationException($this->getFullName() . ' needs to be set', $this->getName());
         }
-        
+
         try {
             if (key_exists($this->getName(), $value)) {
                 $this->filterChain->validate($value[$this->getName()]);
@@ -99,7 +99,7 @@ abstract class KeyValidation extends Validation
     /**
      * get a single option by name
      *
-     * @param mixed $options            
+     * @param mixed $options
      */
     public function getOption($options)
     {
@@ -108,7 +108,7 @@ abstract class KeyValidation extends Validation
 
     /**
      *
-     * @param Filter $filter            
+     * @param Filter $filter
      */
     protected function addFilter(Filter $filter)
     {
@@ -131,9 +131,9 @@ abstract class KeyValidation extends Validation
 
     /**
      *
-     * @param string $option            
-     * @param boolean $default            
-     * @param boolean $required            
+     * @param string $option
+     * @param boolean $default
+     * @param boolean $required
      */
     protected function checkForBoolean($option, $default = false, $required = false)
     {
@@ -148,13 +148,13 @@ abstract class KeyValidation extends Validation
     /**
      * This functionc checks, if the options dont contain options from $a and $b
      *
-     * @param array $a            
-     * @param array $b            
+     * @param array $a
+     * @param array $b
      */
     protected function checkForExclusivity(array $a, array $b)
     {
         $intersec = array_intersect(array_keys($this->options), $a);
-        
+
         if (count($intersec) > 0) {
             if (count(array_intersect(array_keys($this->options), $b)) > 0) {
                 trigger_error($this->getFullName() . ' - ' . join(', ', $a) . ' cant be paired with ' . join(' ,', $b), E_USER_ERROR);
@@ -164,9 +164,9 @@ abstract class KeyValidation extends Validation
 
     /**
      *
-     * @param string $options            
-     * @param boolean $required            
-     * @param int|null $default            
+     * @param string $options
+     * @param boolean $required
+     * @param int|null $default
      */
     protected function checkForInt($option, $required = false, $default = null)
     {
@@ -175,9 +175,9 @@ abstract class KeyValidation extends Validation
 
     /**
      *
-     * @param string $option            
-     * @param boolean $required            
-     * @param int|float|null $default            
+     * @param string $option
+     * @param boolean $required
+     * @param int|float|null $default
      */
     protected function checkForIntOrFloat($option, $required = false, $default = null)
     {
@@ -186,9 +186,9 @@ abstract class KeyValidation extends Validation
 
     /**
      *
-     * @param string $option            
-     * @param boolean $required            
-     * @param string|null $default            
+     * @param string $option
+     * @param boolean $required
+     * @param string|null $default
      */
     protected function checkForString($option, $required = false, $default = null)
     {
@@ -198,7 +198,7 @@ abstract class KeyValidation extends Validation
     private function checkForType($option, $required, $default, $type)
     {
         if (key_exists($option, $this->getOptions())) {
-            
+
             switch ($type) {
                 case Types::BOOLEAN:
                     if (! is_bool($this->options[$option])) {
@@ -265,7 +265,7 @@ abstract class KeyValidation extends Validation
 
     /**
      *
-     * @param array $arguments            
+     * @param array $arguments
      */
     public function setCallableArguments(array $arguments)
     {
@@ -274,6 +274,6 @@ abstract class KeyValidation extends Validation
 
     public function setCallable(\Closure $function)
     {
-        $this->options[Properties::CAL_ABLE] = new CallableBox($function);
+        $this->options[Properties::CALL_ABLE] = new CallableBox($function);
     }
 }
