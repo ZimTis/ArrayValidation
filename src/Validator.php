@@ -2,16 +2,17 @@
 namespace zimtis\arrayvalidation;
 
 use zimtis\arrayvalidation\validations\Validation;
+use zimtis\arrayvalidation\validations\NestedValidation;
 
 /**
  * Manage every SchemaValidation a user loads.
  *
  * @author ZimTis
- *        
+ *
  * @since 0.0.1 added
  * @since 0.0.6 completely rewritten
  * @since 0.0.7 add developer mode
- *       
+ *
  */
 class Validator
 {
@@ -42,13 +43,13 @@ class Validator
      *
      * @param string $schemaFile
      *            path to the file rooting from root of the project
-     * @param string|null $name            
+     * @param string|null $name
      */
     public function addSchemaValidation($schemaFile, $name = NULL)
     {
         $realName = $this->generateName($schemaFile, $name);
         $realpath = getcwd() . DIRECTORY_SEPARATOR . $schemaFile;
-        
+
         if (file_exists($realpath)) {
             if (! key_exists($realName, $this->schemaValidations)) {
                 // TODO can we do it better?
@@ -57,13 +58,13 @@ class Validator
                     if (is_null($json)) {
                         trigger_error($schemaFile . ' is not a valid json file', E_USER_ERROR);
                     }
-                    
+
                     $validation = ValidationBuilder::buildValidation($json);
-                    
+
                     if (! $this->devMode) {
                         file_put_contents($realpath . '.ser', serialize($validation));
                     }
-                    
+
                     $this->schemaValidations[$realName] = $validation;
                 } else {
                     $this->schemaValidations[$realName] = unserialize(file_get_contents($realpath . '.ser'));
@@ -77,9 +78,27 @@ class Validator
     }
 
     /**
+     * This method creates a Validation object from string
+     * this validation will not get a name or will be stored inside the validator
+     *
+     * @param string $string
+     *
+     * @return NestedValidation
+     */
+    public function addSchemaFromString($string)
+    {
+        $json = json_decode($string, true);
+        if (is_null($json)) {
+            trigger_error('not a valid json');
+        }
+
+        return ValidationBuilder::buildValidation($json);
+    }
+
+    /**
      * Removes the SchemaValidation with the given name
      *
-     * @param string $name            
+     * @param string $name
      */
     public function removeSchema($name)
     {
@@ -107,7 +126,7 @@ class Validator
 
     /**
      *
-     * @param string $name            
+     * @param string $name
      *
      * @return Validation
      */
@@ -116,14 +135,14 @@ class Validator
         if (key_exists($name, $this->schemaValidations)) {
             return $this->schemaValidations[$name];
         }
-        
+
         trigger_error('No Validatino with the name ' . $name . ' could be found.', E_USER_ERROR);
     }
 
     /**
      *
-     * @param string $path            
-     * @param string $name            
+     * @param string $path
+     * @param string $name
      * @return string
      */
     private function generateName($path, $name)
@@ -140,7 +159,7 @@ class Validator
     /**
      * Cheks if a serialized version of the schema file exist
      *
-     * @param string $schemaFile            
+     * @param string $schemaFile
      *
      * @return boolean true if a serialized file exist, false if not
      */
