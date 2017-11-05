@@ -1,5 +1,5 @@
 <?php
-namespace zimtis\test;
+namespace zimtis\arrayvalidation\test;
 
 class TestUtil
 {

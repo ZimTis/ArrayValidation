@@ -1,21 +1,21 @@
 {
-    "name":{
-        "type":"string"
+  "name": {
+    "__type__": "string"
+  },
+  "position": {
+    "lat": {
+      "__type__": "float"
     },
-    "position":{
-        "lat":{
-            "type":"float"
-        },
-        "lng":{
-            "type":"float"
-        },
-        "address":{
-            "street":{
-                "type":"string"
-            },
-            "zip":{
-                "type":"string"
-            }
-        }
+    "lng": {
+      "__type__": "float"
+    },
+    "address": {
+      "street": {
+        "__type__": "string"
+      },
+      "zip": {
+        "__type__": "string"
+      }
     }
+  }
 }

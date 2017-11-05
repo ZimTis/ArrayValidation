@@ -13,7 +13,7 @@ class ArrayMinLengthFilter extends Filter
         $this->minLength = $minLength;
     }
 
-    public function validate(array $value)
+    public function validate($value)
     {
         if (count($value) < $this->minLength) {
             throw new \Exception(sprintf('size must be bigger or equal %d, %d found', $this->minLength, count($value)));

@@ -11,7 +11,7 @@ class ArrayValidationTest extends TestCase
     {
         $this->baseOptions = array(
             'item' => array(
-                'type' => 'string'
+                '__type__' => 'string'
             )
         );
     }

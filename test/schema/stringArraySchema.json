@@ -1,9 +1,9 @@
 {
-    "name":{
-        "type":"array",
-        "length":3,
-        "item":{
-            "type":"string"
-        }
+  "name": {
+    "__type__": "array",
+    "length": 3,
+    "item": {
+      "__type__": "string"
     }
+  }
 }

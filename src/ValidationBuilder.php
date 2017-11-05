@@ -1,4 +1,5 @@
 <?php
+
 namespace zimtis\arrayvalidation;
 
 use zimtis\arrayvalidation\validations\NestedValidation;
@@ -12,7 +13,7 @@ use zimtis\arrayvalidation\validations\keyValidations\ArrayValidation;
 /**
  *
  * @author ZimTis
- *        
+ *
  * @since 0.0.6
  */
 class ValidationBuilder
@@ -21,19 +22,26 @@ class ValidationBuilder
     /**
      * This function builds a validation acording to the specifgications of the json file
      *
-     * @param array $schema            
+     * @param array $schema
+     * @param null $name
+     * @return NestedValidation
      */
     public static function buildValidation(array $schema, $name = null)
     {
         $validation = new NestedValidation($name);
-        
+
         foreach ($schema as $key => $value) {
-            
+
+            if (!is_array($value)) {
+                trigger_error('parsing error', E_USER_ERROR);
+            }
+
             if (self::isNestedValidation($value)) {
                 $validation->addValidation(self::buildValidation($value, $key));
             } else {
                 $validation->addValidation(self::buildKeyValidation($value, $key));
             }
+
         }
         return $validation;
     }
@@ -41,31 +49,30 @@ class ValidationBuilder
     /**
      * Check if the found value is a nestedValidation
      *
-     * @param array $value            
+     * @param array $value
      * @return boolean
      *
      * @see NestedValidation
      */
     private static function isNestedValidation(array $value)
     {
-        return ! (key_exists(Properties::TYPE, $value) && ! is_array($value[Properties::TYPE]));
+        return !(key_exists(Properties::TYPE, $value) && !is_array($value[Properties::TYPE]));
     }
 
     /**
      * Builds a KeyValidation
      *
-     * @param array $options            
-     * @param string $name            
-     * @return \zimtis\arrayvalidation\validations\keyValidations\StringValidation
+     * @param array $options
+     * @param string $name
+     * @return \zimtis\arrayvalidation\validations\KeyValidation
      *
-     * @see KeyValidation
      */
     public static function buildKeyValidation(array $options, $name)
     {
-        if (! key_exists(Properties::TYPE, $options)) {
+        if (!key_exists(Properties::TYPE, $options)) {
             trigger_error($name . ' must have a type');
         }
-        
+
         switch ($options[Properties::TYPE]) {
             case Types::STR:
             case Types::STRING:

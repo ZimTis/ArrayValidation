@@ -13,7 +13,7 @@ class ArrayMaxLengthFilter extends Filter
         $this->maxLength = $maxLength;
     }
 
-    public function validate(array $value)
+    public function validate($value)
     {
         if (count($value) > $this->maxLength) {
             throw new \Exception(sprintf('size must be smaller or equal %d, %d found', $this->maxLength, count($value)));

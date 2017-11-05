@@ -1,6 +1,6 @@
 <?php
 use PHPUnit\Framework\TestCase;
-use zimtis\test\TestUtil;
+use zimtis\arrayvalidation\test\TestUtil;
 use zimtis\arrayvalidation\Validator;
 
 class ValidatorDevelopTest extends TestCase

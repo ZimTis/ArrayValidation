@@ -11,7 +11,7 @@ class CallableFilterTest extends TestCase
     public function testNonStaticFilterBooleanResult()
     {
         $s = new StringValidation('name', array(
-            'callable' => '\zimtis\test\CallableUtil:trueNonStaticFunction'
+            'callable' => '\zimtis\arrayvalidation\test\CallableUtil:trueNonStaticFunction'
         ));
 
         $filter = new CallableFilter($s);
@@ -25,7 +25,7 @@ class CallableFilterTest extends TestCase
     public function testNonStaticFilterNoBooleanResult()
     {
         $s = new StringValidation('name', array(
-            'callable' => '\zimtis\test\CallableUtil:nonBooleanNonStaticFunction'
+            'callable' => '\zimtis\arrayvalidation\test\CallableUtil:nonBooleanNonStaticFunction'
         ));
 
         $filter = new CallableFilter($s);
@@ -36,7 +36,7 @@ class CallableFilterTest extends TestCase
     public function testStaticFilterBooleanResult()
     {
         $s = new StringValidation('name', array(
-            'callable' => '\zimtis\test\CallableUtil::trueStaticFunction'
+            'callable' => '\zimtis\arrayvalidation\test\CallableUtil::trueStaticFunction'
         ));
 
         $filter = new CallableFilter($s);
@@ -50,7 +50,7 @@ class CallableFilterTest extends TestCase
     public function testStaticFilterNoBooleanResult()
     {
         $s = new StringValidation('name', array(
-            'callable' => '\zimtis\test\CallableUtil::nonBooleanStaticFunction'
+            'callable' => '\zimtis\arrayvalidation\test\CallableUtil::nonBooleanStaticFunction'
         ));
 
         $filter = new CallableFilter($s);
@@ -90,7 +90,7 @@ class CallableFilterTest extends TestCase
     public function testFunctionFilterBooleanResult()
     {
         $s = new StringValidation('name', array(
-            'callable' => '\zimtis\test\trueFunction'
+            'callable' => '\zimtis\arrayvalidation\test\trueFunction'
         ));
 
         $filter = new CallableFilter($s);
@@ -104,7 +104,7 @@ class CallableFilterTest extends TestCase
     public function testFunctionFilterNoBooleanResult()
     {
         $s = new StringValidation('name', array(
-            'callable' => '\zimtis\test\nonBooleanFunction'
+            'callable' => '\zimtis\arrayvalidation\test\nonBooleanFunction'
         ));
 
         $filter = new CallableFilter($s);

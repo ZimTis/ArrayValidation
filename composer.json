@@ -1,32 +1,33 @@
 {
-	"keywords" : [
-		"array",
-		"validation"
-	],
-	"autoload" : {
-		"psr-4" : {
-			"zimtis\\arrayvalidation\\" : "src"
-		}
-	},
-	"autoload-dev" : {
-		"psr-4" : {
-			"zimtis\\test\\" : "test"
-		}
-	},
-	"name" : "zimtis/array-validation",
-	"type" : "library",
-	"description" : "A library to validate the content of an array",
-	"require" : {
-		"php" : ">=5.3"
-	},
-	"support" : {
-		"source" : "https://github.com/ZimTis/array-validation",
-		"issues" : "https://github.com/ZimTis/array-validation/issues",
-		"wiki" : "https://github.com/ZimTis/array-validation/wiki"
-	},
-	"require-dev" : {
-		"php" : ">=5.6",
-		"phpunit/phpunit" : "5.5.*"
-	},
-	"license" : "MIT"
+  "keywords": [
+    "array",
+    "validation"
+  ],
+  "autoload": {
+    "psr-4": {
+      "zimtis\\arrayvalidation\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "zimtis\\arrayvalidation\\test\\": "test"
+    }
+  },
+  "name": "zimtis/array-validation",
+  "type": "library",
+  "description": "A library to validate the content of an array",
+  "require": {
+    "php": ">=5.3",
+    "myclabs/php-enum": "1.5.2"
+  },
+  "support": {
+    "source": "https://github.com/ZimTis/array-validation",
+    "issues": "https://github.com/ZimTis/array-validation/issues",
+    "wiki": "https://github.com/ZimTis/array-validation/wiki"
+  },
+  "require-dev": {
+    "php": ">=5.6",
+    "phpunit/phpunit": "5.5.*"
+  },
+  "license": "MIT"
 }

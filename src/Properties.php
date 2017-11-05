@@ -1,5 +1,8 @@
 <?php
+
 namespace zimtis\arrayvalidation;
+
+use MyCLabs\Enum\Enum;
 
 /**
  *
@@ -12,8 +15,24 @@ namespace zimtis\arrayvalidation;
  * @since 0.0.71 renamed to Properties
  * @since 0.0.8 add oneOf
  * @since 0.0.9 add callable
+ * @since 0.0.95 change type to '__type__', uses MyCLabs Enums
+ *
+ * @method static TYPE()
+ * @method static REQUIRED()
+ * @method static NULLABLE()
+ * @method static MIN_LENGTH()
+ * @method static MAX_LENGTH();
+ * @method static LENGTH()
+ * @method static TRIMMED()
+ * @method static MIN()
+ * @method static MAX()
+ * @method static ITEM()
+ * @method static START_WIDTH()
+ * @method static END_WITH()
+ * @method static ONE_OF()
+ * @method static CALL_ABLE()
  */
-class Properties
+class Properties extends Enum
 {
 
     /**
@@ -22,7 +41,7 @@ class Properties
      *
      * @var string
      */
-    const TYPE = 'type';
+    const TYPE = '__type__';
 
     /**
      * Is the value required, default is false

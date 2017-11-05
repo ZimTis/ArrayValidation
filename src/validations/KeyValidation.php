@@ -1,4 +1,5 @@
 <?php
+
 namespace zimtis\arrayvalidation\validations;
 
 use zimtis\arrayvalidation\validations\Validation;
@@ -45,7 +46,7 @@ abstract class KeyValidation extends Validation
 
     /**
      *
-     * @param unknown $name
+     * @param string $name
      */
     public function __construct($name, array $options)
     {
@@ -73,7 +74,7 @@ abstract class KeyValidation extends Validation
      */
     public function validate($value)
     {
-        if ($this->options[Properties::REQUIRED] && ! key_exists($this->getName(), $value)) {
+        if ($this->options[Properties::REQUIRED] && !key_exists($this->getName(), $value)) {
             throw new ValidationException($this->getFullName() . ' needs to be set', $this->getName());
         }
 
@@ -137,12 +138,12 @@ abstract class KeyValidation extends Validation
      */
     protected function checkForBoolean($option, $default = false, $required = false)
     {
-        $this->checkForType($option, $required, $default, Types::BOOLEAN);
+        $this->checkForType($option, $required, $default, Types::BOOLEAN());
     }
 
     protected function checkForArray($option, $default = null, $required = false)
     {
-        $this->checkForType($option, $required, $default, Types::ARRY);
+        $this->checkForType($option, $required, $default, Types::ARRY());
     }
 
     /**
@@ -157,7 +158,8 @@ abstract class KeyValidation extends Validation
 
         if (count($intersec) > 0) {
             if (count(array_intersect(array_keys($this->options), $b)) > 0) {
-                trigger_error($this->getFullName() . ' - ' . join(', ', $a) . ' cant be paired with ' . join(' ,', $b), E_USER_ERROR);
+                trigger_error($this->getFullName() . ' - ' . join(', ', $a) . ' cant be paired with ' . join(' ,', $b),
+                    E_USER_ERROR);
             }
         }
     }
@@ -170,7 +172,7 @@ abstract class KeyValidation extends Validation
      */
     protected function checkForInt($option, $required = false, $default = null)
     {
-        $this->checkForType($option, $required, $default, Types::INTEGER);
+        $this->checkForType($option, $required, $default, Types::INTEGER());
     }
 
     /**
@@ -181,7 +183,7 @@ abstract class KeyValidation extends Validation
      */
     protected function checkForIntOrFloat($option, $required = false, $default = null)
     {
-        $this->checkForType($option, $required, $default, Types::INTEGER_OR_FLOAT);
+        $this->checkForType($option, $required, $default, Types::NUMBER());
     }
 
     /**
@@ -192,36 +194,36 @@ abstract class KeyValidation extends Validation
      */
     protected function checkForString($option, $required = false, $default = null)
     {
-        $this->checkForType($option, $required, $default, Types::STRING);
+        $this->checkForType($option, $required, $default, Types::STRING());
     }
 
-    private function checkForType($option, $required, $default, $type)
+    private function checkForType($option, $required, $default, Types $type)
     {
         if (key_exists($option, $this->getOptions())) {
 
             switch ($type) {
                 case Types::BOOLEAN:
-                    if (! is_bool($this->options[$option])) {
+                    if (!is_bool($this->options[$option])) {
                         $this->triggerTypeCheckError($option, $type);
                     }
                     break;
                 case Types::INTEGER:
-                    if (! is_int($this->options[$option])) {
+                    if (!is_int($this->options[$option])) {
                         $this->triggerTypeCheckError($option, $type);
                     }
                     break;
                 case Types::STRING:
-                    if (! is_string($this->options[$option])) {
+                    if (!is_string($this->options[$option])) {
                         $this->triggerTypeCheckError($option, $type);
                     }
                     break;
-                case Types::INTEGER_OR_FLOAT:
-                    if (! is_int($this->options[$option]) && ! is_float($this->options[$option])) {
+                case Types::NUMBER:
+                    if (!is_int($this->options[$option]) && !is_float($this->options[$option])) {
                         $this->triggerTypeCheckError($option, 'integer or float');
                     }
                     break;
                 case Types::ARRY:
-                    if (! is_array($this->options[$option])) {
+                    if (!is_array($this->options[$option])) {
                         $this->triggerTypeCheckError($option, $type);
                     }
                     break;
@@ -239,7 +241,8 @@ abstract class KeyValidation extends Validation
 
     private function triggerTypeCheckError($option, $expected)
     {
-        trigger_error(sprintf('%s must be %s, %s found', $option, $expected, gettype($this->options[$option])), E_USER_ERROR);
+        trigger_error(sprintf('%s must be %s, %s found', $option, $expected, gettype($this->options[$option])),
+            E_USER_ERROR);
     }
 
     /**
