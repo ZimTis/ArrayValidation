@@ -47,6 +47,7 @@ abstract class KeyValidation extends Validation
     /**
      *
      * @param string $name
+     * @param array $options
      */
     public function __construct($name, array $options)
     {
@@ -100,11 +101,12 @@ abstract class KeyValidation extends Validation
     /**
      * get a single option by name
      *
-     * @param mixed $options
+     * @param Properties $option
+     * @return mixed
      */
-    public function getOption($options)
+    public function getOption(Properties $option)
     {
-        return $this->options[$options];
+        return $this->options[$option->getValue()];
     }
 
     /**
@@ -121,7 +123,7 @@ abstract class KeyValidation extends Validation
     }
 
     /**
-     * builds the filterchain acording to the options
+     * builds the filter chain according to the options
      */
     protected abstract function buildFilterChain();
 
@@ -147,18 +149,18 @@ abstract class KeyValidation extends Validation
     }
 
     /**
-     * This functionc checks, if the options dont contain options from $a and $b
+     * This function checks, if the options don't contain options from $a and $b
      *
      * @param array $a
      * @param array $b
      */
     protected function checkForExclusivity(array $a, array $b)
     {
-        $intersec = array_intersect(array_keys($this->options), $a);
+        $array_intersect = array_intersect(array_keys($this->options), $a);
 
-        if (count($intersec) > 0) {
+        if (count($array_intersect) > 0) {
             if (count(array_intersect(array_keys($this->options), $b)) > 0) {
-                trigger_error($this->getFullName() . ' - ' . join(', ', $a) . ' cant be paired with ' . join(' ,', $b),
+                trigger_error($this->getFullName() . ' - ' . join(', ', $a) . ' can\'t be paired with ' . join(' ,', $b),
                     E_USER_ERROR);
             }
         }
@@ -166,9 +168,10 @@ abstract class KeyValidation extends Validation
 
     /**
      *
-     * @param string $options
+     * @param $option
      * @param boolean $required
      * @param int|null $default
+     * @internal param string $options
      */
     protected function checkForInt($option, $required = false, $default = null)
     {
@@ -278,5 +281,10 @@ abstract class KeyValidation extends Validation
     public function setCallable(\Closure $function)
     {
         $this->options[Properties::CALL_ABLE] = new CallableBox($function);
+    }
+
+    private function getFilter()
+    {
+        return $this->filterChain;
     }
 }

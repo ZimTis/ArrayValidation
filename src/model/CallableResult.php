@@ -1,4 +1,5 @@
 <?php
+
 namespace zimtis\arrayvalidation\model;
 
 /**
@@ -11,14 +12,14 @@ class CallableResult
 {
 
     /**
-     * Whas this callable a success
+     * Was this callable a success
      *
      * @var boolean
      */
     private $result;
 
     /**
-     * string that will be returnes on error
+     * string that will be returned on error
      *
      * @var string
      */
@@ -55,7 +56,7 @@ class CallableResult
 
     /**
      *
-     * @param unknown $errorString
+     * @param string $errorString
      * @return \zimtis\arrayvalidation\model\CallableResult
      */
     public function setErrorString($errorString)

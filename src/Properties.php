@@ -135,7 +135,7 @@ class Properties extends Enum
      *
      * @var string
      */
-    const START_WITH = 'startWith';
+    const START_WIDTH = 'startWith';
 
     /**
      * available for string

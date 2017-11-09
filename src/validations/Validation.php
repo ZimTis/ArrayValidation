@@ -1,11 +1,12 @@
 <?php
+
 namespace zimtis\arrayvalidation\validations;
 
 /**
  * Responsable for validating one key schema
  *
  * @author ZimTis
- *        
+ *
  * @since 0.0.6 added
  * @since 0.0.7 add getFullName method
  * @since 0.0.9 add support for callable filter
@@ -27,7 +28,7 @@ abstract class Validation
 
     /**
      *
-     * @param string $name            
+     * @param string $name
      */
     public function __construct($name)
     {
@@ -38,12 +39,12 @@ abstract class Validation
 
     /**
      *
-     * @param string $name            
+     * @param string $name
      * @return \zimtis\arrayvalidation\validations\Validation
      */
     public function setName($name)
     {
-        $this->name;
+        $this->name = $name;
         return $this;
     }
 
@@ -58,7 +59,7 @@ abstract class Validation
 
     /**
      * returns the fully qualified name of this validation.
-     * Seperated by :
+     * Separated by :
      *
      * @return string
      */
@@ -68,8 +69,8 @@ abstract class Validation
         if (is_null($this->parent)) {
             return $this->getName();
         }
-        
-        return (! is_null($this->parent->getFullName()) ? ($this->parent->getFullName() . ':') : '') . $this->getName();
+
+        return (!is_null($this->parent->getFullName()) ? ($this->parent->getFullName() . ':') : '') . $this->getName();
     }
 
     public function setParent(Validation $parent)
@@ -92,7 +93,7 @@ abstract class Validation
      */
     public function getKeyValidationByName($route)
     {
-        if (! is_string($route)) {
+        if (!is_string($route)) {
             throw new \Exception(sprintf('route must be a string, %s given', gettype($route)));
         }
     }

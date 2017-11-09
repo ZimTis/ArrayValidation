@@ -1,4 +1,5 @@
 <?php
+
 use PHPUnit\Framework\TestCase;
 use zimtis\arrayvalidation\Validator;
 
@@ -14,7 +15,10 @@ class StringArrayTest extends TestCase
     public function setUp()
     {
         $this->validator = new Validator(true);
-        $this->validator->addSchemaValidation('test' . DIRECTORY_SEPARATOR . 'schema' . DIRECTORY_SEPARATOR . 'stringArraySchema.json', "s");
+        $this->validator->addSchemaValidation('test' . DIRECTORY_SEPARATOR . 'schema' . DIRECTORY_SEPARATOR . 'stringArraySchema.json',
+            "s");
+        $this->validator->addSchemaValidation('test' . DIRECTORY_SEPARATOR . 'schema' . DIRECTORY_SEPARATOR . 'nestedItemSchema.json',
+            "ss");
     }
 
     public function testCorrect()
@@ -26,7 +30,7 @@ class StringArrayTest extends TestCase
                 "sd"
             )
         );
-        
+
         $this->validator->validate("s", $a);
     }
 
@@ -42,7 +46,14 @@ class StringArrayTest extends TestCase
                 "sd"
             )
         );
-        
+
         $this->validator->validate("s", $a);
+    }
+
+    public function testNestedItem()
+    {
+        $a = array("position" => array(array('lat' => 0.0, 'lng' => 0.0)));
+
+        $this->validator->validate('ss', $a);
     }
 }

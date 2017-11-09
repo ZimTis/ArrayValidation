@@ -26,7 +26,6 @@ use MyCLabs\Enum\Enum;
  */
 class Types extends Enum
 {
-
     const STRING = "string";
 
     const STR = "str";

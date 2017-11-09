@@ -40,7 +40,7 @@ class CallableFilter extends Filter
          *
          * @var CallableBox $callable
          */
-        $callable = $this->keyValidator->getOption(Properties::CALL_ABLE);
+        $callable = $this->keyValidator->getOption(Properties::CALL_ABLE());
         $arguments = $this->keyValidator->getCallableArguments();
         $arguments = is_null($arguments) || ! is_array($arguments) ? array() : $arguments;
         if ($callable instanceof CallableBox) {
@@ -48,7 +48,7 @@ class CallableFilter extends Filter
             $result = call_user_func($callable->getCallable(), $value, $arguments);
             if ($result instanceof CallableResult) {
                 if (! $result->getResult()) {
-                    throw new \Exception(sprintf('%s , Callable returnes false, %s', $this->keyValidator->getFullName(), $result->getErrorString()));
+                    throw new \Exception(sprintf('%s , Callable returns false, %s', $this->keyValidator->getFullName(), $result->getErrorString()));
                 }
             } else {
                 throw new \Exception(sprintf('%s , Callable must return a CallableResult', $this->keyValidator->getFullName()));

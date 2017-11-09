@@ -1,20 +1,21 @@
 <?php
+
 namespace zimtis\arrayvalidation\filter;
 
-use zimtis\arrayvalidation\validations\KeyValidation;
+use zimtis\arrayvalidation\validations\Validation;
 
 class ArrayFilter extends Filter
 {
 
     /**
      *
-     * @var KeyValidation
+     * @var Validation
      */
     private $keyValidation;
 
     private $name;
 
-    public function __construct(KeyValidation $keyValidation, $name)
+    public function __construct(Validation $keyValidation, $name)
     {
         $this->keyValidation = $keyValidation;
         $this->name = $name;
@@ -22,9 +23,9 @@ class ArrayFilter extends Filter
 
     public function validate($value)
     {
-        foreach ($value as $string) {
+        foreach ($value as $item) {
             $this->keyValidation->validate(array(
-                $this->name => $string
+                $this->name => $item
             ));
         }
     }

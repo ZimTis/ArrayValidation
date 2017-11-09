@@ -1,4 +1,5 @@
 <?php
+
 namespace zimtis\arrayvalidation\filter\attributeFilter;
 
 use zimtis\arrayvalidation\filter\Filter;
@@ -7,7 +8,7 @@ use zimtis\arrayvalidation\Types;
 /**
  *
  * @author ZimTis
- *        
+ *
  * @since 0.0.6 added
  */
 class NumberMinFilter extends Filter
@@ -21,7 +22,7 @@ class NumberMinFilter extends Filter
 
     /**
      *
-     * @param number $min            
+     * @param number $min
      */
     public function __construct($min)
     {
@@ -33,7 +34,7 @@ class NumberMinFilter extends Filter
         if ($value < $this->min) {
             throw new \Exception(sprintf($this->getErrorString($value), $this->min, $value));
         }
-        
+
         parent::validate($value);
     }
 
@@ -47,7 +48,7 @@ class NumberMinFilter extends Filter
                 $type = '%f';
                 break;
         }
-        
+
         return sprintf('must be bigger ot equal %s, %s found', $type, $type);
     }
 }

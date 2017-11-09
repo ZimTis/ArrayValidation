@@ -1,0 +1,13 @@
+{
+  "position": {
+    "__type__": "array",
+    "item": {
+      "lat": {
+        "__type__": "float"
+      },
+      "lng": {
+        "__type__": "float"
+      }
+    }
+  }
+}

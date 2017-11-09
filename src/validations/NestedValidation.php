@@ -1,8 +1,6 @@
 <?php
 namespace zimtis\arrayvalidation\validations;
 
-use zimtis\arrayvalidation\validations\Validation;
-
 /**
  * Validates a nestes schema.
  * aka a multitude of primitve values and other nested schemas
