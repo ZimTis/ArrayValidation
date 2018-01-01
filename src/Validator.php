@@ -65,7 +65,7 @@ class Validator
                         trigger_error($schemaFile . ' is not a valid json file', E_USER_ERROR);
                     }
 
-                    $validation = ValidationBuilder::buildValidation($json);
+                    $validation = $this->createValidation($json);
 
                     if (!$this->devMode) {
                         file_put_contents($realPath . '.ser', serialize($validation));
@@ -98,6 +98,15 @@ class Validator
             trigger_error('not a valid json');
         }
 
+        return $this->createValidation($json);
+    }
+
+    /**
+     * @param array $json
+     * @return NestedValidation
+     */
+    public function createValidation(array $json)
+    {
         return ValidationBuilder::buildValidation($json);
     }
 
